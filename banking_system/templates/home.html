@@ -3,87 +3,340 @@
 {% block title %}Welcome to SecureBank - Secure Online Banking{% endblock %}
 
 {% block content %}
-<div class="row align-items-center">
-    <div class="col-lg-6">
-        <h1 class="display-4 fw-bold text-primary mb-4">Welcome to SecureBank</h1>
-        <p class="lead">A secure and reliable online banking system that prioritizes your financial security.</p>
-        <div class="mb-4">
-            <h5 class="mb-3"><i class="fas fa-shield-alt text-primary me-2"></i>Key Features:</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Secure account management</li>
-                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Safe fund transfers</li>
-                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>KYC verification</li>
-                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Virtual card management</li>
-                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Real-time transaction monitoring</li>
-            </ul>
-        </div>
-        <div class="d-grid gap-2 d-md-flex mt-4">
-            {% if user.is_authenticated %}
-                <a href="{% url 'dashboard:user_dashboard' %}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
-                </a>
-            {% else %}
-                <a href="{% url 'users:login' %}" class="btn btn-primary btn-lg me-md-2">
-                    <i class="fas fa-sign-in-alt me-2"></i>Login
-                </a>
-                <a href="{% url 'users:register' %}" class="btn btn-outline-primary btn-lg">
-                    <i class="fas fa-user-plus me-2"></i>Register
-                </a>
-            {% endif %}
-        </div>
-    </div>
-    <div class="col-lg-6 mt-5 mt-lg-0 text-center">
-        <svg class="img-fluid" width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-            <!-- Banking illustration SVG -->
-            <rect x="100" y="100" width="400" height="250" rx="10" fill="#4a6bdf" />
-            <rect x="120" y="120" width="360" height="210" rx="5" fill="#ffffff" />
-            <rect x="150" y="150" width="300" height="40" rx="5" fill="#f0f4ff" />
-            <rect x="150" y="210" width="140" height="90" rx="5" fill="#f0f4ff" />
-            <rect x="310" y="210" width="140" height="90" rx="5" fill="#f0f4ff" />
-            <circle cx="220" cy="255" r="25" fill="#4a6bdf" />
-            <circle cx="380" cy="255" r="25" fill="#4a6bdf" />
-            <rect x="200" y="60" width="200" height="30" rx="15" fill="#4a6bdf" />
-            <text x="245" y="82" font-family="Arial" font-size="18" fill="white">SECURE BANK</text>
-            <path d="M210,255 L220,245 L230,255" stroke="white" stroke-width="3" fill="none" />
-            <path d="M370,245 L380,255 L390,245" stroke="white" stroke-width="3" fill="none" />
+<!-- Hero Section with Gradient Background -->
+<div class="relative bg-gradient-to-r from-primary-700 to-primary-500 rounded-3xl overflow-hidden shadow-xl mb-16">
+    <div class="absolute inset-0">
+        <svg class="opacity-10" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"></path>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"></rect>
+            <circle cx="750" cy="150" r="100" fill="white" opacity="0.1"></circle>
+            <circle cx="250" cy="800" r="70" fill="white" opacity="0.1"></circle>
+            <circle cx="850" cy="650" r="120" fill="white" opacity="0.1"></circle>
         </svg>
+    </div>
+    <div class="relative px-8 py-12 md:px-12 md:py-20 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+                    Banking Made <span class="text-yellow-300">Simple</span> and <span class="text-yellow-300">Secure</span>
+                </h1>
+                <p class="text-xl text-white opacity-90 mb-6">
+                    A modern online banking platform that prioritizes your financial security and provides a seamless experience.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'dashboard:user_dashboard' %}" class="inline-flex items-center px-6 py-3 bg-white text-primary-700 font-semibold rounded-full shadow-lg hover:bg-gray-100 transition duration-300">
+                            <i class="fas fa-tachometer-alt mr-2"></i>Go to Dashboard
+                        </a>
+                    {% else %}
+                        <a href="{% url 'users:login' %}" class="inline-flex items-center px-6 py-3 bg-white text-primary-700 font-semibold rounded-full shadow-lg hover:bg-gray-100 transition duration-300">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Login
+                        </a>
+                        <a href="{% url 'users:register' %}" class="inline-flex items-center px-6 py-3 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-primary-700 transition duration-300">
+                            <i class="fas fa-user-plus mr-2"></i>Register
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-full max-w-md">
+                    <!-- Credit card design -->
+                    <div class="absolute top-10 right-10 w-72 h-44 bg-gradient-to-br from-primary-400 to-primary-800 rounded-xl transform rotate-6 shadow-xl z-10"></div>
+                    <div class="relative w-72 h-44 bg-gradient-to-r from-primary-800 to-primary-600 rounded-xl shadow-2xl z-20 p-5 text-white">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs opacity-70">SecureBank</p>
+                                <div class="mt-6">
+                                    <p class="font-mono text-lg opacity-90">**** **** **** 4289</p>
+                                </div>
+                            </div>
+                            <div>
+                                <i class="fas fa-wifi transform rotate-90 text-xl opacity-70"></i>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-between items-end">
+                            <div>
+                                <p class="text-xs opacity-70 mb-1">Card Holder</p>
+                                <p class="text-sm font-semibold">JOHN DOE</p>
+                            </div>
+                            <div>
+                                <p class="text-xs opacity-70 mb-1">Expires</p>
+                                <p class="text-sm font-semibold">05/28</p>
+                            </div>
+                            <div class="flex items-center justify-center h-10 w-10">
+                                <svg class="h-full" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="25" cy="25" r="20" fill="rgba(255,255,255,0.1)"></circle>
+                                    <circle cx="15" cy="25" r="10" fill="rgba(255,255,255,0.3)"></circle>
+                                    <circle cx="35" cy="25" r="10" fill="rgba(255,255,255,0.3)"></circle>
+                                    <circle cx="25" cy="25" r="5" fill="rgba(255,255,255,0.5)"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mobile app view -->
+                    <div class="absolute -bottom-8 -left-8 w-64 h-96 bg-white rounded-3xl shadow-2xl z-0 p-3">
+                        <div class="w-full h-full bg-gray-100 rounded-2xl flex flex-col">
+                            <div class="bg-primary-600 rounded-t-2xl p-3 flex justify-between items-center text-white">
+                                <i class="fas fa-bars"></i>
+                                <span class="text-sm font-semibold">SecureBank App</span>
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="flex-1 p-4">
+                                <div class="bg-white rounded-lg shadow-sm p-3 mb-3">
+                                    <p class="text-xs text-gray-500">Available Balance</p>
+                                    <p class="text-lg font-bold text-primary-700">$24,562.00</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="bg-white rounded-lg shadow-sm p-2 flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                            <i class="fas fa-arrow-down text-green-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="text-xs font-medium">Income</p>
+                                            <p class="text-xs text-gray-500">Today</p>
+                                        </div>
+                                        <p class="text-sm font-semibold text-green-600">+$1,200</p>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-sm p-2 flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mr-2">
+                                            <i class="fas fa-arrow-up text-red-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="text-xs font-medium">Transfer</p>
+                                            <p class="text-xs text-gray-500">Yesterday</p>
+                                        </div>
+                                        <p class="text-sm font-semibold text-red-600">-$850</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-white rounded-b-2xl flex justify-around text-primary-600 text-xs">
+                                <div class="text-center">
+                                    <i class="fas fa-home"></i>
+                                    <p>Home</p>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fas fa-exchange-alt"></i>
+                                    <p>Transfer</p>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fas fa-credit-card"></i>
+                                    <p>Cards</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<hr class="my-5">
+<!-- Features Section -->
+<div class="mb-16">
+    <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Complete Banking Solutions</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Discover all the features that make SecureBank the most comprehensive banking platform for your financial needs.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="p-8">
+                <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-shield-alt text-primary-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Banking</h3>
+                <p class="text-gray-600">Your financial security is our top priority. Advanced encryption and multi-factor authentication protect your data and transactions.</p>
+                <div class="mt-6">
+                    <a href="#" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="p-8">
+                <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-credit-card text-primary-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Virtual Cards</h3>
+                <p class="text-gray-600">Create and manage virtual debit and credit cards with specific limits. Fund them from your account and use them safely online.</p>
+                <div class="mt-6">
+                    <a href="{% url 'cards:card_list' %}" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="p-8">
+                <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-exchange-alt text-primary-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Quick Transfers</h3>
+                <p class="text-gray-600">Transfer funds securely to other accounts with just a few clicks. Track all your transactions in real-time with detailed records.</p>
+                <div class="mt-6">
+                    <a href="{% url 'transactions:transfer_money' %}" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature 4 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="p-8">
+                <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-id-card text-primary-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">KYC Verification</h3>
+                <p class="text-gray-600">Simple and secure identity verification process. Upload your documents and get verified to unlock all banking features.</p>
+                <div class="mt-6">
+                    <a href="{% url 'kyc:kyc_status' %}" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature 5 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="p-8">
+                <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-chart-line text-primary-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Real-time Monitoring</h3>
+                <p class="text-gray-600">Track your account activity in real-time. Get instant notifications for every transaction to stay in control of your finances.</p>
+                <div class="mt-6">
+                    <a href="#" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature 6 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="p-8">
+                <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-lock text-primary-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">PIN Security</h3>
+                <p class="text-gray-600">Enhanced security with PIN verification for sensitive operations. Change your PIN regularly to keep your account secure.</p>
+                <div class="mt-6">
+                    <a href="{% url 'accounts:change_pin' %}" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="row">
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body text-center p-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-shield-alt fa-3x text-primary"></i>
+<!-- Testimonials Section -->
+<div class="bg-primary-50 rounded-3xl py-16 px-8 mb-16">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">What Our Users Say</h2>
+            <p class="text-lg text-gray-600">Join thousands of satisfied customers who trust SecureBank for their financial needs.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center mr-4">
+                        <span class="text-primary-700 font-bold">JD</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">John Davies</h4>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
                 </div>
-                <h4 class="card-title">Secure Banking</h4>
-                <p class="card-text">Your financial security is our top priority. Advanced encryption and security protocols to protect your data.</p>
+                <p class="text-gray-600 italic">"The virtual card feature has been a game-changer for my online shopping. I feel much more secure using these cards for different websites."</p>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center mr-4">
+                        <span class="text-primary-700 font-bold">SM</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Sarah Miller</h4>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600 italic">"I love how easy it is to transfer money to friends and family. The KYC process was quick, and the interface is so intuitive!"</p>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center mr-4">
+                        <span class="text-primary-700 font-bold">RJ</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Robert Johnson</h4>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600 italic">"The security features give me peace of mind. I appreciate the real-time notifications and the ability to deactivate cards instantly if needed."</p>
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body text-center p-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-credit-card fa-3x text-primary"></i>
-                </div>
-                <h4 class="card-title">Virtual Cards</h4>
-                <p class="card-text">Create and manage virtual debit and credit cards. Fund them from your account and use them safely online.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body text-center p-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-exchange-alt fa-3x text-primary"></i>
-                </div>
-                <h4 class="card-title">Quick Transfers</h4>
-                <p class="card-text">Transfer funds securely to other accounts with just a few clicks. Track all your transactions in real-time.</p>
-            </div>
+</div>
+
+<!-- CTA Section -->
+<div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-3xl py-16 px-8 text-center mb-16">
+    <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Experience Modern Banking?</h2>
+        <p class="text-xl text-white opacity-90 mb-8">Join SecureBank today and take control of your finances with our secure, feature-rich platform.</p>
+        <div class="flex justify-center space-x-4 flex-wrap">
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard:user_dashboard' %}" class="px-8 py-4 bg-white text-primary-700 font-bold rounded-full shadow-lg hover:bg-gray-100 transition duration-300">
+                    <i class="fas fa-tachometer-alt mr-2"></i>Access Dashboard
+                </a>
+            {% else %}
+                <a href="{% url 'users:register' %}" class="px-8 py-4 bg-white text-primary-700 font-bold rounded-full shadow-lg hover:bg-gray-100 transition duration-300">
+                    <i class="fas fa-user-plus mr-2"></i>Create Free Account
+                </a>
+                <a href="{% url 'users:login' %}" class="px-8 py-4 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-primary-700 transition duration-300">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Login
+                </a>
+            {% endif %}
         </div>
     </div>
 </div>

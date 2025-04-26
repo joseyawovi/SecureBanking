@@ -158,3 +158,10 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://95f916c5-c851-4658-a0d2-9b6ad14118b1-00-579wk1w70dfw.janeway.replit.dev',
+    'https://*.replit.dev',
+    'https://*.repl.co',
+]
