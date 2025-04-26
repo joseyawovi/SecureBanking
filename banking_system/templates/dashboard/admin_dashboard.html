@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Dashboard - SecureBank{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0"><i class="fas fa-user-shield me-2 text-primary"></i>Admin Dashboard</h2>
+    <a href="{% url 'admin:index' %}" class="btn btn-primary">
+        <i class="fas fa-cog me-2"></i>Django Admin
+    </a>
+</div>
+
+<!-- System Stats Cards -->
+<div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total Users</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_users }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Active Accounts</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_active_accounts }} / {{ total_accounts }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-money-check-alt fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Total Cards</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_cards }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-credit-card fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Total Transactions</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_transactions }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-exchange-alt fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Pending KYC Column -->
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-id-card me-2"></i>Pending KYC Verifications</h5>
+                <span class="badge bg-light text-dark">{{ pending_kyc.count }}</span>
+            </div>
+            <div class="card-body p-0">
+                {% if pending_kyc %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>User</th>
+                                    <th>Document Type</th>
+                                    <th>Uploaded</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for document in pending_kyc %}
+                                    <tr>
+                                        <td>
+                                            <strong>{{ document.user.full_name }}</strong><br>
+                                            <small class="text-muted">{{ document.user.email }}</small>
+                                        </td>
+                                        <td>{{ document.get_document_type_display }}</td>
+                                        <td>{{ document.uploaded_at|date:"M d, Y" }}</td>
+                                        <td>
+                                            <a href="{% url 'dashboard:verify_kyc_document' document.id %}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-check-circle me-1"></i>Review
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-check-circle text-success fa-3x mb-3"></i>
+                        <h6>No Pending KYC Verifications</h6>
+                        <p class="text-muted">All submitted documents have been processed.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-exchange-alt me-2"></i>Recent Transactions</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Reference</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transaction in recent_transactions %}
+                                <tr>
+                                    <td>
+                                        <small>{{ transaction.reference_id|truncatechars:10 }}</small>
+                                    </td>
+                                    <td>
+                                        {% if transaction.transaction_type == 'transfer' %}
+                                            <span class="badge bg-primary">Transfer</span>
+                                        {% elif transaction.transaction_type == 'deposit' %}
+                                            <span class="badge bg-success">Deposit</span>
+                                        {% elif transaction.transaction_type == 'withdrawal' %}
+                                            <span class="badge bg-warning text-dark">Withdrawal</span>
+                                        {% elif transaction.transaction_type == 'card_funding' %}
+                                            <span class="badge bg-info">Card Funding</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>${{ transaction.amount|floatformat:2 }}</td>
+                                    <td>{{ transaction.timestamp|date:"M d, Y H:i" }}</td>
+                                    <td>
+                                        {% if transaction.status == 'completed' %}
+                                            <span class="badge bg-success">Completed</span>
+                                        {% elif transaction.status == 'pending' %}
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Failed</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Users Column -->
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-users me-2"></i>Recent User Registrations</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>User</th>
+                                <th>Registered</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in recent_users %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ user.full_name }}</strong><br>
+                                        <small class="text-muted">{{ user.email }}</small>
+                                    </td>
+                                    <td>{{ user.date_joined|date:"M d, Y" }}</td>
+                                    <td>
+                                        {% if user.is_active and user.is_verified %}
+                                            <span class="badge bg-success">Active</span>
+                                        {% elif user.is_active and not user.is_verified %}
+                                            <span class="badge bg-warning text-dark">Not Verified</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Inactive</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'admin:users_user_change' user.id %}" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit me-1"></i>Edit
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Actions -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-tools me-2"></i>Admin Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body text-center py-4">
+                                <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                                <h5>Users Management</h5>
+                                <a href="{% url 'admin:users_user_changelist' %}" class="btn btn-sm btn-primary mt-2">
+                                    Manage Users
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body text-center py-4">
+                                <i class="fas fa-money-check-alt fa-3x text-success mb-3"></i>
+                                <h5>Accounts Management</h5>
+                                <a href="{% url 'admin:accounts_account_changelist' %}" class="btn btn-sm btn-success mt-2">
+                                    Manage Accounts
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body text-center py-4">
+                                <i class="fas fa-exchange-alt fa-3x text-info mb-3"></i>
+                                <h5>Transactions</h5>
+                                <a href="{% url 'admin:transactions_transaction_changelist' %}" class="btn btn-sm btn-info mt-2">
+                                    View Transactions
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body text-center py-4">
+                                <i class="fas fa-id-card fa-3x text-warning mb-3"></i>
+                                <h5>KYC Documents</h5>
+                                <a href="{% url 'admin:kyc_kycdocument_changelist' %}" class="btn btn-sm btn-warning mt-2">
+                                    View Documents
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

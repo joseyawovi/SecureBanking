@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create New Card - SecureBank{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:user_dashboard' %}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'cards:card_list' %}">Cards</a></li>
+                <li class="breadcrumb-item active">Create New Card</li>
+            </ol>
+        </nav>
+
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>Create New Virtual Card</h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="alert alert-info mb-4">
+                    <h5><i class="fas fa-info-circle me-2"></i>About Virtual Cards</h5>
+                    <p class="mb-0">Virtual cards can be used for online transactions and subscriptions. They provide an additional layer of security by keeping your main account details private. You can fund these cards from your main account balance.</p>
+                </div>
+                
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.card_type|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.pin|as_crispy_field }}
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Important:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>Your card details will only be shown once upon creation</li>
+                            <li>New cards start with a balance of $0.00</li>
+                            <li>You'll need to fund your card before using it</li>
+                            <li>Your account PIN is required to authorize card creation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle me-2"></i>Create Virtual Card
+                        </button>
+                        <a href="{% url 'cards:card_list' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-shield-alt me-2 text-primary"></i>Card Security Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-primary mb-2">Debit Card Features:</h6>
+                        <ul>
+                            <li>Linked directly to your account balance</li>
+                            <li>Allows spending only up to your funded amount</li>
+                            <li>Ideal for everyday online purchases</li>
+                            <li>Lower risk for regular transactions</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-primary mb-2">Credit Card Features:</h6>
+                        <ul>
+                            <li>Requires manual funding from your account</li>
+                            <li>Can set aside specific amounts for particular purposes</li>
+                            <li>Better for subscription services</li>
+                            <li>Recommended for recurring payments</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-light mt-3">
+                    <small>
+                        <i class="fas fa-lock me-2"></i>
+                        <strong>Security Notice:</strong> Virtual cards add an extra layer of security by isolating your main account from online merchants. If a virtual card is compromised, you can simply deactivate it without affecting your main account.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

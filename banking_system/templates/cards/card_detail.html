@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Card Details - SecureBank{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard:user_dashboard' %}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'cards:card_list' %}">Cards</a></li>
+        <li class="breadcrumb-item active">Card Details</li>
+    </ol>
+</nav>
+
+{% if new_card_details %}
+<div class="alert alert-warning alert-dismissible fade show mb-4">
+    <h5 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i>Important - Save Your Card Details</h5>
+    <p>These card details will be shown <strong>only once</strong>. Please save this information securely:</p>
+    <ul>
+        <li><strong>Card Number:</strong> {{ new_card_details.card_number }}</li>
+        <li><strong>CVV:</strong> {{ new_card_details.cvv }}</li>
+        <li><strong>Expiry Date:</strong> {{ new_card_details.expiry_date }}</li>
+    </ul>
+    <p class="mb-0">For security reasons, we'll only show the last 4 digits of your card number in the future.</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-lg-5">
+        <!-- Card Information -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>Card Information</h5>
+            </div>
+            <div class="card-body">
+                <!-- Virtual Card Display -->
+                <div class="virtual-card mb-4 p-4 bg-primary text-white rounded" style="min-height: 200px;">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h6 class="mb-1 text-white">{{ card.get_card_type_display }}</h6>
+                            <p class="mb-0 opacity-75">SecureBank</p>
+                        </div>
+                        <div>
+                            <i class="fab fa-cc-visa fa-2x"></i>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="mb-0">{{ card.masked_card_number }}</h5>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <small class="opacity-75">Expiry Date</small>
+                            <p class="mb-0">{{ card.expiry_date|date:"m/Y" }}</p>
+                        </div>
+                        <div>
+                            <small class="opacity-75">CVV</small>
+                            <p class="mb-0">***</p>
+                        </div>
+                        <div>
+                            <small class="opacity-75">Balance</small>
+                            <p class="mb-0">${{ card.balance|floatformat:2 }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card Details -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-hashtag me-2 text-primary"></i>Card Number</span>
+                        <span class="fw-bold">{{ card.masked_card_number }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-calendar-alt me-2 text-primary"></i>Expiry Date</span>
+                        <span class="fw-bold">{{ card.expiry_date|date:"m/Y" }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-money-bill-wave me-2 text-primary"></i>Balance</span>
+                        <span class="fw-bold">${{ card.balance|floatformat:2 }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-tag me-2 text-primary"></i>Card Type</span>
+                        <span class="fw-bold">{{ card.get_card_type_display }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-calendar-plus me-2 text-primary"></i>Created On</span>
+                        <span class="fw-bold">{{ card.created_at|date:"M d, Y" }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-toggle-on me-2 text-primary"></i>Status</span>
+                        {% if card.is_expired %}
+                            <span class="badge bg-danger">Expired</span>
+                        {% elif card.is_active %}
+                            <span class="badge bg-success">Active</span>
+                        {% else %}
+                            <span class="badge bg-danger">Inactive</span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-light">
+                {% if card.is_active and not card.is_expired %}
+                    <div class="d-grid gap-2">
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="{% url 'cards:fund_card' card.id %}" class="btn btn-primary d-block">
+                                    <i class="fas fa-plus me-2"></i>Fund Card
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="{% url 'cards:withdraw_from_card' card.id %}" class="btn btn-outline-primary d-block">
+                                    <i class="fas fa-minus me-2"></i>Withdraw
+                                </a>
+                            </div>
+                        </div>
+                        <a href="{% url 'cards:deactivate_card' card.id %}" class="btn btn-outline-danger">
+                            <i class="fas fa-power-off me-2"></i>Deactivate Card
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger mb-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        {% if card.is_expired %}
+                            This card has expired and cannot be used.
+                        {% else %}
+                            This card is inactive and cannot be used.
+                        {% endif %}
+                    </div>
+                    <div class="d-grid">
+                        <a href="{% url 'cards:card_list' %}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Cards
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-7">
+        <!-- Card Usage Tips -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Card Usage Guidelines</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title text-primary">
+                                    <i class="fas fa-shield-alt me-2"></i>Security Tips
+                                </h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Never share your full card number, CVV, or expiry date</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Only use your virtual card on secure websites (https://)</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Monitor your transactions regularly</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Deactivate your card immediately if you suspect unauthorized use</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title text-primary">
+                                    <i class="fas fa-credit-card me-2"></i>Card Management
+                                </h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Fund your card before use</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Only fund the amount you need for intended transactions</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Withdraw funds back to your account when not needed</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Create different cards for different purposes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary">
+                            <i class="fas fa-globe me-2"></i>Online Usage
+                        </h6>
+                        <p>Your virtual card works with most online merchants that accept major credit/debit cards. You can use it for:</p>
+                        <div class="row text-center">
+                            <div class="col-md-3 col-6 mb-3">
+                                <i class="fas fa-shopping-cart fa-2x text-primary mb-2"></i>
+                                <p class="mb-0">Online Shopping</p>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <i class="fas fa-film fa-2x text-primary mb-2"></i>
+                                <p class="mb-0">Streaming Services</p>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <i class="fas fa-music fa-2x text-primary mb-2"></i>
+                                <p class="mb-0">Subscriptions</p>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <i class="fas fa-plane fa-2x text-primary mb-2"></i>
+                                <p class="mb-0">Travel Bookings</p>
+                            </div>
+                        </div>
+                        <div class="alert alert-light mt-3">
+                            <small>
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Note:</strong> Virtual cards can only be used for online/digital transactions and cannot be used for in-person, physical transactions.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h5>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="cardFAQ">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                Can I change my card's expiry date?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="faq1" data-bs-parent="#cardFAQ">
+                            <div class="accordion-body">
+                                No, card expiry dates are set at creation and cannot be modified. If your card is expiring soon, you should create a new card and transfer your balance.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                What happens if my card expires?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#cardFAQ">
+                            <div class="accordion-body">
+                                When a card expires, it can no longer be used for transactions. Any remaining balance can still be withdrawn to your main account.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                Can I have multiple virtual cards?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#cardFAQ">
+                            <div class="accordion-body">
+                                Yes, you can create multiple virtual cards for different purposes. This is a good security practice as it limits exposure in case one card is compromised.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                                What should I do if I suspect unauthorized transactions?
+                            </button>
+                        </h2>
+                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#cardFAQ">
+                            <div class="accordion-body">
+                                If you suspect unauthorized transactions, immediately deactivate your card and contact customer support. This is one of the key benefits of virtual cards - they can be instantly deactivated and replaced.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Verify KYC Document - SecureBank{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:admin_dashboard' %}">Admin Dashboard</a></li>
+                <li class="breadcrumb-item active">Verify KYC Document</li>
+            </ol>
+        </nav>
+
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="fas fa-id-card me-2"></i>KYC Document Verification</h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5 class="mb-3">User Information</h5>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <p><strong>Name:</strong> {{ document.user.full_name }}</p>
+                                <p><strong>Email:</strong> {{ document.user.email }}</p>
+                                <p><strong>Account Number:</strong> {{ document.user.account.account_number }}</p>
+                                <p><strong>Registration Date:</strong> {{ document.user.date_joined|date:"F d, Y" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="mb-3">Document Information</h5>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <p><strong>Document Type:</strong> {{ document.get_document_type_display }}</p>
+                                <p><strong>Document Number:</strong> {{ document.document_number }}</p>
+                                <p><strong>Uploaded Date:</strong> {{ document.uploaded_at|date:"F d, Y H:i" }}</p>
+                                <p><strong>Status:</strong> 
+                                    <span class="badge bg-warning">Pending</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h5 class="mb-3">Document Preview</h5>
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                {% if document.document_file.url|slice:"-3:" == "pdf" %}
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-file-pdf me-2"></i>PDF Document: {{ document.filename }}
+                                    </div>
+                                    <a href="{{ document.document_file.url }}" class="btn btn-primary" target="_blank">
+                                        <i class="fas fa-eye me-2"></i>View PDF Document
+                                    </a>
+                                {% else %}
+                                    <img src="{{ document.document_file.url }}" class="img-fluid border" alt="KYC Document" style="max-height: 400px;">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="mb-3">Verification Decision</h5>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <form method="post" novalidate>
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <div class="mt-4 d-flex justify-content-between">
+                                        <a href="{% url 'dashboard:admin_dashboard' %}" class="btn btn-secondary">
+                                            <i class="fas fa-arrow-left me-2"></i>Return to Dashboard
+                                        </a>
+                                        <div>
+                                            <button type="submit" name="approve" class="btn btn-success me-2">
+                                                <i class="fas fa-check-circle me-2"></i>Submit Decision
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

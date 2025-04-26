@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}KYC Document Upload - SecureBank{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:user_dashboard' %}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'kyc:kyc_status' %}">KYC Status</a></li>
+                <li class="breadcrumb-item active">Upload Documents</li>
+            </ol>
+        </nav>
+
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-id-card me-2"></i>KYC Document Upload</h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="alert alert-info mb-4">
+                    <h5><i class="fas fa-info-circle me-2"></i>Know Your Customer (KYC) Verification</h5>
+                    <p class="mb-0">KYC verification is required to ensure the security of our banking system and comply with financial regulations. Your documents will be securely stored and reviewed by our team.</p>
+                </div>
+                
+                <form method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.document_type|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.document_number|as_crispy_field }}
+                        </div>
+                        <div class="col-12">
+                            {{ form.document_file|as_crispy_field }}
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Important:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>Accepted document formats: PDF, PNG, JPG, JPEG</li>
+                            <li>Maximum file size: 5MB</li>
+                            <li>Document must be clearly legible and not expired</li>
+                            <li>All personal information must be clearly visible</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload me-2"></i>Upload Document
+                        </button>
+                        <a href="{% url 'kyc:kyc_status' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to KYC Status
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0"><i class="fas fa-question-circle me-2 text-primary"></i>KYC Document Guidelines</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-primary"><i class="fas fa-passport me-2"></i>Acceptable ID Documents:</h6>
+                        <ul>
+                            <li>Passport (valid and not expired)</li>
+                            <li>Driver's License (valid and not expired)</li>
+                            <li>National ID Card (valid and not expired)</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-primary"><i class="fas fa-file-invoice me-2"></i>Acceptable Proof of Address:</h6>
+                        <ul>
+                            <li>Utility Bill (not older than 3 months)</li>
+                            <li>Bank Statement (not older than 3 months)</li>
+                            <li>Government-issued document showing address</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-light mt-3">
+                    <small>
+                        <i class="fas fa-lock me-2"></i>
+                        <strong>Privacy Notice:</strong> All submitted documents are encrypted and securely stored. Only authorized personnel can access your documents for verification purposes.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

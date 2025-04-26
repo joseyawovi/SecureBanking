@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to SecureBank - Secure Online Banking{% endblock %}
+
+{% block content %}
+<div class="row align-items-center">
+    <div class="col-lg-6">
+        <h1 class="display-4 fw-bold text-primary mb-4">Welcome to SecureBank</h1>
+        <p class="lead">A secure and reliable online banking system that prioritizes your financial security.</p>
+        <div class="mb-4">
+            <h5 class="mb-3"><i class="fas fa-shield-alt text-primary me-2"></i>Key Features:</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Secure account management</li>
+                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Safe fund transfers</li>
+                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>KYC verification</li>
+                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Virtual card management</li>
+                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Real-time transaction monitoring</li>
+            </ul>
+        </div>
+        <div class="d-grid gap-2 d-md-flex mt-4">
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard:user_dashboard' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                </a>
+            {% else %}
+                <a href="{% url 'users:login' %}" class="btn btn-primary btn-lg me-md-2">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                </a>
+                <a href="{% url 'users:register' %}" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-user-plus me-2"></i>Register
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+        <svg class="img-fluid" width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Banking illustration SVG -->
+            <rect x="100" y="100" width="400" height="250" rx="10" fill="#4a6bdf" />
+            <rect x="120" y="120" width="360" height="210" rx="5" fill="#ffffff" />
+            <rect x="150" y="150" width="300" height="40" rx="5" fill="#f0f4ff" />
+            <rect x="150" y="210" width="140" height="90" rx="5" fill="#f0f4ff" />
+            <rect x="310" y="210" width="140" height="90" rx="5" fill="#f0f4ff" />
+            <circle cx="220" cy="255" r="25" fill="#4a6bdf" />
+            <circle cx="380" cy="255" r="25" fill="#4a6bdf" />
+            <rect x="200" y="60" width="200" height="30" rx="15" fill="#4a6bdf" />
+            <text x="245" y="82" font-family="Arial" font-size="18" fill="white">SECURE BANK</text>
+            <path d="M210,255 L220,245 L230,255" stroke="white" stroke-width="3" fill="none" />
+            <path d="M370,245 L380,255 L390,245" stroke="white" stroke-width="3" fill="none" />
+        </svg>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                </div>
+                <h4 class="card-title">Secure Banking</h4>
+                <p class="card-text">Your financial security is our top priority. Advanced encryption and security protocols to protect your data.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-credit-card fa-3x text-primary"></i>
+                </div>
+                <h4 class="card-title">Virtual Cards</h4>
+                <p class="card-text">Create and manage virtual debit and credit cards. Fund them from your account and use them safely online.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-exchange-alt fa-3x text-primary"></i>
+                </div>
+                <h4 class="card-title">Quick Transfers</h4>
+                <p class="card-text">Transfer funds securely to other accounts with just a few clicks. Track all your transactions in real-time.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

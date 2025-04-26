@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KYC Status - SecureBank{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:user_dashboard' %}">Dashboard</a></li>
+                <li class="breadcrumb-item active">KYC Status</li>
+            </ol>
+        </nav>
+
+        <!-- KYC Status Overview -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-id-card me-2"></i>KYC Verification Status</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-center py-4">
+                            {% if kyc_status == 'Approved' %}
+                                <i class="fas fa-check-circle text-success fa-5x mb-3"></i>
+                                <h4>KYC Verified</h4>
+                                <p class="text-muted">Your identity has been successfully verified. You have full access to all banking services.</p>
+                            {% elif kyc_status == 'Pending' %}
+                                <i class="fas fa-clock text-warning fa-5x mb-3"></i>
+                                <h4>Verification in Progress</h4>
+                                <p class="text-muted">Your documents are being reviewed by our team. This process usually takes 1-2 business days.</p>
+                            {% elif kyc_status == 'Rejected' %}
+                                <i class="fas fa-times-circle text-danger fa-5x mb-3"></i>
+                                <h4>Verification Failed</h4>
+                                <p class="text-muted">Your document verification was unsuccessful. Please check the rejection reason and submit new documents.</p>
+                            {% else %}
+                                <i class="fas fa-exclamation-circle text-secondary fa-5x mb-3"></i>
+                                <h4>Not Verified</h4>
+                                <p class="text-muted">You haven't submitted your KYC documents yet. Complete verification to access all banking features.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4">
+                            <h5 class="mb-3">What is KYC?</h5>
+                            <p>KYC (Know Your Customer) is a process by which banks obtain information about the identity and address of their customers. This process helps ensure that services are not misused.</p>
+                            
+                            <h5 class="mb-3 mt-4">Why is KYC required?</h5>
+                            <ul>
+                                <li>To prevent identity theft</li>
+                                <li>To prevent fraud and money laundering</li>
+                                <li>To comply with financial regulations</li>
+                                <li>To ensure the security of banking operations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <div class="d-grid">
+                    <a href="{% url 'kyc:upload_document' %}" class="btn btn-primary">
+                        {% if documents %}
+                            <i class="fas fa-upload me-2"></i>Upload Additional Document
+                        {% else %}
+                            <i class="fas fa-upload me-2"></i>Submit KYC Documents
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submitted Documents -->
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-file-alt me-2"></i>Submitted Documents</h5>
+            </div>
+            <div class="card-body p-0">
+                {% if documents %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Document Type</th>
+                                    <th>Document Number</th>
+                                    <th>Uploaded On</th>
+                                    <th>Status</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for document in documents %}
+                                    <tr>
+                                        <td>{{ document.get_document_type_display }}</td>
+                                        <td>{{ document.document_number }}</td>
+                                        <td>{{ document.uploaded_at|date:"M d, Y H:i" }}</td>
+                                        <td>
+                                            {% if document.status == 'approved' %}
+                                                <span class="badge bg-success">Approved</span>
+                                            {% elif document.status == 'pending' %}
+                                                <span class="badge bg-warning text-dark">Pending</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">Rejected</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if document.status == 'rejected' %}
+                                                <span class="text-danger">{{ document.rejection_reason }}</span>
+                                            {% elif document.status == 'approved' %}
+                                                <span class="text-success">Verified on {{ document.verified_at|date:"M d, Y" }}</span>
+                                            {% else %}
+                                                <span class="text-muted">Under review</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-file-upload text-muted fa-4x mb-3"></i>
+                        <h5>No Documents Submitted</h5>
+                        <p class="text-muted">You haven't uploaded any KYC documents yet.</p>
+                        <a href="{% url 'kyc:upload_document' %}" class="btn btn-primary mt-3">
+                            <i class="fas fa-upload me-2"></i>Upload Documents Now
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

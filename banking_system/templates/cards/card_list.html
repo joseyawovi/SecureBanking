@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Your Cards - SecureBank{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard:user_dashboard' %}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Cards</li>
+    </ol>
+</nav>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0"><i class="fas fa-credit-card me-2 text-primary"></i>Your Virtual Cards</h2>
+    <a href="{% url 'cards:create_card' %}" class="btn btn-primary">
+        <i class="fas fa-plus-circle me-2"></i>Create New Card
+    </a>
+</div>
+
+{% if cards %}
+    <div class="row">
+        {% for card in cards %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow h-100 {% if not card.is_active or card.is_expired %}bg-light{% endif %}">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">{{ card.get_card_type_display }}</h5>
+                        <div>
+                            {% if card.is_expired %}
+                                <span class="badge bg-danger">Expired</span>
+                            {% elif not card.is_active %}
+                                <span class="badge bg-danger">Inactive</span>
+                            {% else %}
+                                <span class="badge bg-success">Active</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="virtual-card mb-3 p-3 bg-light rounded">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <i class="fas fa-sim-card text-primary me-2"></i>
+                                    <span class="fw-bold">{{ card.masked_card_number }}</span>
+                                </div>
+                                <div>
+                                    <i class="fab fa-cc-visa text-primary fa-2x"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-muted">Expires</small><br>
+                                    <span>{{ card.expiry_date|date:"m/Y" }}</span>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Balance</small><br>
+                                    <span class="fw-bold">${{ card.balance|floatformat:2 }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if card.is_active and not card.is_expired %}
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'cards:card_detail' card.id %}" class="btn btn-primary">
+                                    <i class="fas fa-info-circle me-2"></i>View Details
+                                </a>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="{% url 'cards:fund_card' card.id %}" class="btn btn-outline-primary d-block">
+                                            <i class="fas fa-plus me-1"></i>Fund
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="{% url 'cards:withdraw_from_card' card.id %}" class="btn btn-outline-primary d-block">
+                                            <i class="fas fa-minus me-1"></i>Withdraw
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger mb-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                {% if card.is_expired %}
+                                    This card has expired and cannot be used.
+                                {% else %}
+                                    This card is inactive and cannot be used.
+                                {% endif %}
+                            </div>
+                            <div class="d-grid">
+                                <a href="{% url 'cards:card_detail' card.id %}" class="btn btn-secondary">
+                                    <i class="fas fa-info-circle me-2"></i>View Details
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Created: {{ card.created_at|date:"M d, Y" }}</small>
+                        {% if card.is_active %}
+                            <a href="{% url 'cards:deactivate_card' card.id %}" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-power-off me-1"></i>Deactivate
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="card shadow">
+        <div class="card-body text-center py-5">
+            <i class="far fa-credit-card text-muted fa-5x mb-3"></i>
+            <h3>No Virtual Cards Found</h3>
+            <p class="text-muted">You haven't created any virtual cards yet.</p>
+            <a href="{% url 'cards:create_card' %}" class="btn btn-primary mt-3">
+                <i class="fas fa-plus-circle me-2"></i>Create Your First Card
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+<div class="card shadow-sm mt-4">
+    <div class="card-header bg-light">
+        <h5 class="mb-0"><i class="fas fa-question-circle me-2 text-primary"></i>Virtual Card FAQ</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-primary">What are virtual cards?</h6>
+                <p>Virtual cards are digital payment cards that can be used for online transactions without exposing your actual account details.</p>
+                
+                <h6 class="text-primary mt-3">How do I fund my virtual card?</h6>
+                <p>You can transfer money from your main account balance to your virtual card using the "Fund" button on the card.</p>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-primary">Are there any fees for virtual cards?</h6>
+                <p>No, creating and using virtual cards is completely free within our banking system.</p>
+                
+                <h6 class="text-primary mt-3">What's the difference between debit and credit virtual cards?</h6>
+                <p>Virtual debit cards link directly to your account, while virtual credit cards have a separate balance that you pre-fund.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,309 @@
+/* 
+ * SecureBank - Custom CSS Styles
+ * Main stylesheet for the banking system application
+ */
+
+/* ========== General Styling ========== */
+:root {
+    --primary-color: #4a6bdf;
+    --primary-dark: #3a55b4;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --white: #ffffff;
+    --body-bg: #f5f8fc;
+    --card-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+body {
+    background-color: var(--body-bg);
+    color: #444;
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    padding-bottom: 60px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* ========== Typography ========== */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+.text-warning {
+    color: var(--warning-color) !important;
+}
+
+.text-info {
+    color: var(--info-color) !important;
+}
+
+/* ========== Navigation ========== */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.nav-item {
+    margin-right: 5px;
+}
+
+.dropdown-menu {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 0.25rem;
+}
+
+/* ========== Cards ========== */
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.card-header {
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-footer {
+    padding: 1rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* Border left cards for stats */
+.card.border-left-primary {
+    border-left: 4px solid var(--primary-color);
+}
+
+.card.border-left-success {
+    border-left: 4px solid var(--success-color);
+}
+
+.card.border-left-info {
+    border-left: 4px solid var(--info-color);
+}
+
+.card.border-left-warning {
+    border-left: 4px solid var(--warning-color);
+}
+
+.card.border-left-danger {
+    border-left: 4px solid var(--danger-color);
+}
+
+/* Card hover effect */
+.card.shadow-sm:hover {
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2) !important;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* ========== Buttons ========== */
+.btn {
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* ========== Custom Components ========== */
+
+/* Virtual Card Styling */
+.virtual-card {
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.virtual-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Dashboard Feature Icons */
+.feature-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.75rem;
+    background-color: rgba(74, 107, 223, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Account overview section */
+.account-overview {
+    padding: 1rem;
+}
+
+/* ========== Forms ========== */
+.form-control {
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(74, 107, 223, 0.25);
+}
+
+/* ========== Alerts ========== */
+.alert {
+    border-radius: 0.25rem;
+    border: none;
+    padding: 1rem;
+}
+
+.alert-dismissible .btn-close {
+    padding: 1.25rem;
+}
+
+/* ========== Tables ========== */
+.table {
+    margin-bottom: 0;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(74, 107, 223, 0.05);
+}
+
+.table th {
+    font-weight: 600;
+    border-top: none;
+}
+
+.table-light {
+    background-color: #f8f9fa;
+}
+
+/* ========== Badges ========== */
+.badge {
+    padding: 0.4em 0.6em;
+    font-weight: 500;
+    border-radius: 0.25rem;
+}
+
+/* ========== Lists ========== */
+.list-group-item {
+    padding: 0.75rem 1.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* ========== Footer ========== */
+footer {
+    background-color: var(--light-color);
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+/* ========== Responsive adjustments ========== */
+@media (max-width: 767.98px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .virtual-card {
+        font-size: 0.9rem;
+    }
+}
+
+/* ========== Animations ========== */
+.fade-in {
+    animation: fadeIn ease 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+/* ========== Print styles ========== */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    body {
+        padding: 0 !important;
+        background-color: white !important;
+    }
+}
