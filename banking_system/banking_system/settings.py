@@ -1,24 +1,32 @@
 """
 Django settings for banking_system project.
+
+This configuration is designed for production readiness with proper security measures.
+Environment variables should be used for all sensitive information.
 """
 
 import os
 from pathlib import Path
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables - in production, use a proper .env file
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+# SECURITY SETTINGS
+# ----------------
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-secret-key-replace-in-production'
+# Secret key - use environment variable in production
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_secret_key())
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Debug mode - should be False in production
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', '95f916c5-c851-4658-a0d2-9b6ad14118b1-00-579wk1w70dfw.janeway.replit.dev', '.replit.dev', '.repl.co']
+# Allowed hosts - use comma-separated list in environment variable
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+# Add Replit domains
+ALLOWED_HOSTS.extend(['0.0.0.0', '.replit.dev', '.repl.co'])
 
 
 # Application definition
@@ -178,9 +186,98 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-# CSRF Trusted Origins
-CSRF_TRUSTED_ORIGINS = [
+# CSRF Trusted Origins - use environment variable in production
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
+# Add Replit domains
+CSRF_TRUSTED_ORIGINS.extend([
     'https://95f916c5-c851-4658-a0d2-9b6ad14118b1-00-579wk1w70dfw.janeway.replit.dev',
-    'https://*.replit.dev',
-    'https://*.repl.co',
-]
+    'https://*.replit.dev', 
+    'https://*.repl.co'
+])
+# Remove empty strings
+CSRF_TRUSTED_ORIGINS = [origin for origin in CSRF_TRUSTED_ORIGINS if origin]
+
+# SECURITY ENHANCEMENTS FOR PRODUCTION
+# -----------------------------------
+# Only enable these in production environment
+
+# Security middleware settings
+SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'False') == 'True'
+SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'False') == 'True'
+CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', 'False') == 'True'
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
+# HSTS settings
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Cookie settings
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+CSRF_USE_SESSIONS = True  # Store CSRF token in session instead of cookie
+
+# Email configuration for production
+if not DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = os.environ.get('EMAIL_HOST')
+    EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@securebank.com')
+
+# Logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'banking_system': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+# Create logs directory and file handler if the directory exists
+import os
+logs_dir = os.path.join(BASE_DIR, 'logs')
+if os.path.exists(logs_dir):
+    log_file = os.path.join(logs_dir, 'banking_system.log')
+    
+    # Add file handler to logging configuration if logs directory exists
+    LOGGING['handlers']['file'] = {
+        'level': 'INFO',
+        'class': 'logging.FileHandler',
+        'filename': log_file,
+        'formatter': 'verbose',
+    }
+    
+    # Add file handler to loggers
+    LOGGING['loggers']['django']['handlers'].append('file')
+    LOGGING['loggers']['banking_system']['handlers'].append('file')
