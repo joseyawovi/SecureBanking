@@ -1,182 +1,189 @@
-/* Main styles for the SecureBank application */
-
-/* Tailwind CSS Integration */
-/* This file contains custom styles beyond what Tailwind provides */
-
-/* Custom colors for our green theme */
-:root {
-  --primary-50: #effdf5;
-  --primary-100: #dcfce9;
-  --primary-200: #bbf7d0;
-  --primary-300: #86efac;
-  --primary-400: #4ade80;
-  --primary-500: #22c55e;
-  --primary-600: #16a34a;
-  --primary-700: #15803d;
-  --primary-800: #166534;
-  --primary-900: #14532d;
-  --primary-950: #052e16;
-}
-
-/* Apply custom styles */
-.bg-primary-50 { background-color: var(--primary-50); }
-.bg-primary-100 { background-color: var(--primary-100); }
-.bg-primary-200 { background-color: var(--primary-200); }
-.bg-primary-300 { background-color: var(--primary-300); }
-.bg-primary-400 { background-color: var(--primary-400); }
-.bg-primary-500 { background-color: var(--primary-500); }
-.bg-primary-600 { background-color: var(--primary-600); }
-.bg-primary-700 { background-color: var(--primary-700); }
-.bg-primary-800 { background-color: var(--primary-800); }
-.bg-primary-900 { background-color: var(--primary-900); }
-.bg-primary-950 { background-color: var(--primary-950); }
-
-.text-primary-50 { color: var(--primary-50); }
-.text-primary-100 { color: var(--primary-100); }
-.text-primary-200 { color: var(--primary-200); }
-.text-primary-300 { color: var(--primary-300); }
-.text-primary-400 { color: var(--primary-400); }
-.text-primary-500 { color: var(--primary-500); }
-.text-primary-600 { color: var(--primary-600); }
-.text-primary-700 { color: var(--primary-700); }
-.text-primary-800 { color: var(--primary-800); }
-.text-primary-900 { color: var(--primary-900); }
-.text-primary-950 { color: var(--primary-950); }
-
-.border-primary-50 { border-color: var(--primary-50); }
-.border-primary-100 { border-color: var(--primary-100); }
-.border-primary-200 { border-color: var(--primary-200); }
-.border-primary-300 { border-color: var(--primary-300); }
-.border-primary-400 { border-color: var(--primary-400); }
-.border-primary-500 { border-color: var(--primary-500); }
-.border-primary-600 { border-color: var(--primary-600); }
-.border-primary-700 { border-color: var(--primary-700); }
-.border-primary-800 { border-color: var(--primary-800); }
-.border-primary-900 { border-color: var(--primary-900); }
-.border-primary-950 { border-color: var(--primary-950); }
-
-.from-primary-50 { --tw-gradient-from: var(--primary-50); }
-.from-primary-100 { --tw-gradient-from: var(--primary-100); }
-.from-primary-200 { --tw-gradient-from: var(--primary-200); }
-.from-primary-300 { --tw-gradient-from: var(--primary-300); }
-.from-primary-400 { --tw-gradient-from: var(--primary-400); }
-.from-primary-500 { --tw-gradient-from: var(--primary-500); }
-.from-primary-600 { --tw-gradient-from: var(--primary-600); }
-.from-primary-700 { --tw-gradient-from: var(--primary-700); }
-.from-primary-800 { --tw-gradient-from: var(--primary-800); }
-.from-primary-900 { --tw-gradient-from: var(--primary-900); }
-.from-primary-950 { --tw-gradient-from: var(--primary-950); }
-
-.to-primary-50 { --tw-gradient-to: var(--primary-50); }
-.to-primary-100 { --tw-gradient-to: var(--primary-100); }
-.to-primary-200 { --tw-gradient-to: var(--primary-200); }
-.to-primary-300 { --tw-gradient-to: var(--primary-300); }
-.to-primary-400 { --tw-gradient-to: var(--primary-400); }
-.to-primary-500 { --tw-gradient-to: var(--primary-500); }
-.to-primary-600 { --tw-gradient-to: var(--primary-600); }
-.to-primary-700 { --tw-gradient-to: var(--primary-700); }
-.to-primary-800 { --tw-gradient-to: var(--primary-800); }
-.to-primary-900 { --tw-gradient-to: var(--primary-900); }
-.to-primary-950 { --tw-gradient-to: var(--primary-950); }
-
-.hover\:bg-primary-50:hover { background-color: var(--primary-50); }
-.hover\:bg-primary-100:hover { background-color: var(--primary-100); }
-.hover\:bg-primary-200:hover { background-color: var(--primary-200); }
-.hover\:bg-primary-300:hover { background-color: var(--primary-300); }
-.hover\:bg-primary-400:hover { background-color: var(--primary-400); }
-.hover\:bg-primary-500:hover { background-color: var(--primary-500); }
-.hover\:bg-primary-600:hover { background-color: var(--primary-600); }
-.hover\:bg-primary-700:hover { background-color: var(--primary-700); }
-.hover\:bg-primary-800:hover { background-color: var(--primary-800); }
-.hover\:bg-primary-900:hover { background-color: var(--primary-900); }
-.hover\:bg-primary-950:hover { background-color: var(--primary-950); }
-
-.hover\:text-primary-50:hover { color: var(--primary-50); }
-.hover\:text-primary-100:hover { color: var(--primary-100); }
-.hover\:text-primary-200:hover { color: var(--primary-200); }
-.hover\:text-primary-300:hover { color: var(--primary-300); }
-.hover\:text-primary-400:hover { color: var(--primary-400); }
-.hover\:text-primary-500:hover { color: var(--primary-500); }
-.hover\:text-primary-600:hover { color: var(--primary-600); }
-.hover\:text-primary-700:hover { color: var(--primary-700); }
-.hover\:text-primary-800:hover { color: var(--primary-800); }
-.hover\:text-primary-900:hover { color: var(--primary-900); }
-.hover\:text-primary-950:hover { color: var(--primary-950); }
-
-/* Custom card styles */
-.card-hover {
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
+/**
+ * SecureBank Custom CSS
+ * A modern, professional banking stylesheet
+ */
 
 /* Custom animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-in-out;
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
-/* Custom form styles */
-.form-control:focus {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 0.25rem rgba(34, 197, 94, 0.25);
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+    }
 }
 
-/* Banking-specific styles */
-.balance-card {
-  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
-  color: white;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Card flip animation */
+.card-container {
+    perspective: 1000px;
 }
 
-.transaction-item {
-  transition: background-color 0.2s ease;
+.card {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* Visual enhancements */
+.hover-shadow:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
 }
 
 .transaction-item:hover {
-  background-color: var(--primary-50);
+    background-color: rgba(22, 163, 74, 0.05);
 }
 
-.credit-amount {
-  color: var(--primary-600);
-  font-weight: 600;
+.notification-badge {
+    animation: pulse 2s infinite;
 }
 
-.debit-amount {
-  color: #ef4444;
-  font-weight: 600;
+/* Dashboard widgets */
+.dashboard-card {
+    transition: all 0.3s ease;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .balance-card {
-    padding: 1rem;
-  }
+.dashboard-card:hover {
+    transform: translateY(-5px);
 }
 
-/* Print styles */
-@media print {
-  .no-print {
-    display: none;
-  }
-  
-  body {
-    font-size: 12pt;
-    color: #000;
-    background: #fff;
-  }
-  
-  .container {
+/* Balance display animation */
+.balance-display .value {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Alert animations */
+[role="alert"] {
+    transition: opacity 0.3s ease;
+}
+
+/* Card styling */
+.credit-card {
+    background: linear-gradient(135deg, #16a34a 0%, #166534 100%);
+    color: white;
+    border-radius: 10px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.credit-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 100%;
-    max-width: 100%;
-  }
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.1" viewBox="0 0 100 100"><path fill="white" d="M0 50 C0 22.4 22.4 0 50 0 C77.6 0 100 22.4 100 50 C100 77.6 77.6 100 50 100 C22.4 100 0 77.6 0 50 Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right -10px top -10px;
+    background-size: 150px 150px;
+}
+
+.credit-card.debit-card {
+    background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+}
+
+/* KYC document area */
+.document-upload-area {
+    border: 2px dashed #16a34a;
+    transition: all 0.3s ease;
+}
+
+.document-upload-area:hover {
+    border-color: #22c55e;
+    background-color: rgba(22, 163, 74, 0.05);
+}
+
+/* Transaction history */
+.transaction-history-filters {
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+}
+
+.transaction-history-filters.collapsed {
+    max-height: 0;
+}
+
+/* Pin input styling */
+.pin-input {
+    letter-spacing: 0.5em;
+    text-align: center;
+}
+
+.pin-input:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+/* Charts and graphs */
+.chart-container {
+    height: 250px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+    .credit-card {
+        height: 180px;
+    }
+    
+    .dashboard-summary {
+        flex-direction: column;
+    }
+}
+
+/* Print styles for statements */
+@media print {
+    header, footer, nav, .no-print {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        color: #000;
+        background-color: #fff;
+    }
+    
+    .print-full-width {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    a {
+        text-decoration: none !important;
+        color: #000 !important;
+    }
 }

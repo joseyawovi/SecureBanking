@@ -1,29 +1,17 @@
 /**
- * SecureBank - Main JavaScript file
- * This file contains custom JavaScript for the banking application
+ * SecureBank - Main JavaScript
+ * A comprehensive set of functions for the banking application
  */
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize tooltips
+    // Initialize all components
     initializeTooltips();
-    
-    // Add event listeners for transaction filters
     setupTransactionFilters();
-    
-    // Setup PIN input behavior
     setupPinInputs();
-    
-    // Setup chart visualizations if present
     setupCharts();
-    
-    // Setup card flipping effect
     setupCardFlip();
-    
-    // Setup session timeout warning
     setupSessionTimeout();
-    
-    // Setup responsive navigation
     setupMobileNavigation();
 });
 
@@ -33,20 +21,31 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeTooltips() {
     const tooltips = document.querySelectorAll('[data-tooltip]');
     tooltips.forEach(tooltip => {
-        tooltip.addEventListener('mouseenter', function(e) {
+        tooltip.addEventListener('mouseenter', function() {
             const tooltipText = this.getAttribute('data-tooltip');
             const tooltipEl = document.createElement('div');
-            tooltipEl.className = 'tooltip bg-gray-800 text-white px-2 py-1 rounded text-sm absolute z-50';
+            tooltipEl.classList.add('tooltip');
             tooltipEl.textContent = tooltipText;
+            tooltipEl.style.position = 'absolute';
+            tooltipEl.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            tooltipEl.style.color = 'white';
+            tooltipEl.style.padding = '5px 10px';
+            tooltipEl.style.borderRadius = '4px';
+            tooltipEl.style.fontSize = '14px';
+            tooltipEl.style.zIndex = '1000';
+            
             document.body.appendChild(tooltipEl);
             
             const rect = this.getBoundingClientRect();
-            tooltipEl.style.top = rect.bottom + 10 + 'px';
-            tooltipEl.style.left = rect.left + (rect.width / 2) - (tooltipEl.offsetWidth / 2) + 'px';
-            
-            this.addEventListener('mouseleave', function() {
-                document.body.removeChild(tooltipEl);
-            }, { once: true });
+            tooltipEl.style.top = (rect.bottom + 10) + 'px';
+            tooltipEl.style.left = (rect.left + rect.width / 2 - tooltipEl.offsetWidth / 2) + 'px';
+        });
+        
+        tooltip.addEventListener('mouseleave', function() {
+            const tooltip = document.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.remove();
+            }
         });
     });
 }
@@ -55,26 +54,30 @@ function initializeTooltips() {
  * Setup transaction filtering functionality
  */
 function setupTransactionFilters() {
-    const filterForm = document.getElementById('transaction-filter-form');
-    if (!filterForm) return;
+    const filterToggle = document.getElementById('filter-toggle');
+    const filterForm = document.getElementById('transaction-filters');
     
-    const filterInputs = filterForm.querySelectorAll('input, select');
-    filterInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            filterForm.submit();
+    if (filterToggle && filterForm) {
+        filterToggle.addEventListener('click', function() {
+            filterForm.classList.toggle('collapsed');
+            const isCollapsed = filterForm.classList.contains('collapsed');
+            filterToggle.innerHTML = isCollapsed 
+                ? '<i class="fas fa-filter"></i> Show Filters' 
+                : '<i class="fas fa-filter"></i> Hide Filters';
         });
-    });
+    }
     
-    const dateRangeSelect = document.getElementById('date-range');
-    const customDateFields = document.getElementById('custom-date-fields');
+    // Date range picker for transaction filters
+    const dateRangeStart = document.getElementById('date-range-start');
+    const dateRangeEnd = document.getElementById('date-range-end');
     
-    if (dateRangeSelect && customDateFields) {
-        dateRangeSelect.addEventListener('change', function() {
-            if (this.value === 'custom') {
-                customDateFields.classList.remove('hidden');
-            } else {
-                customDateFields.classList.add('hidden');
-            }
+    if (dateRangeStart && dateRangeEnd) {
+        dateRangeStart.addEventListener('change', function() {
+            dateRangeEnd.min = this.value;
+        });
+        
+        dateRangeEnd.addEventListener('change', function() {
+            dateRangeStart.max = this.value;
         });
     }
 }
@@ -86,29 +89,28 @@ function setupPinInputs() {
     const pinInputs = document.querySelectorAll('.pin-input');
     
     pinInputs.forEach(input => {
-        // Only allow numbers
-        input.addEventListener('keypress', function(e) {
-            if (!/\d/.test(e.key)) {
-                e.preventDefault();
+        input.addEventListener('input', function() {
+            // Replace any character that's not a digit
+            this.value = this.value.replace(/\D/g, '');
+            
+            // Limit to 4 digits
+            if (this.value.length > 4) {
+                this.value = this.value.slice(0, 4);
             }
         });
         
         // Auto-focus next input
-        input.addEventListener('input', function() {
-            if (this.value.length >= this.maxLength) {
+        input.addEventListener('keyup', function(e) {
+            if (this.value.length >= 4 && e.key !== 'Backspace' && e.key !== 'Delete') {
                 const nextInput = this.nextElementSibling;
-                if (nextInput && nextInput.classList.contains('pin-input')) {
+                if (nextInput && nextInput.tagName === 'INPUT') {
                     nextInput.focus();
-                }
-            }
-        });
-        
-        // Handle backspace
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Backspace' && this.value.length === 0) {
-                const prevInput = this.previousElementSibling;
-                if (prevInput && prevInput.classList.contains('pin-input')) {
-                    prevInput.focus();
+                } else {
+                    // If it's the last input, focus on the submit button
+                    const submitButton = this.form.querySelector('button[type="submit"]');
+                    if (submitButton) {
+                        submitButton.focus();
+                    }
                 }
             }
         });
@@ -119,24 +121,58 @@ function setupPinInputs() {
  * Setup charts for data visualization
  */
 function setupCharts() {
-    const transactionChartElement = document.getElementById('transaction-chart');
-    if (!transactionChartElement) return;
+    // Balance trend chart
+    const balanceTrendCtx = document.getElementById('balance-trend-chart');
     
-    // This is a placeholder function that would typically use a charting library like Chart.js
-    // In a production environment, you would include Chart.js and implement proper charts
-    console.log('Chart visualization would be initialized here');
+    if (balanceTrendCtx) {
+        // This is a placeholder - in a real application, we'd use a charting library
+        // such as Chart.js to create the actual chart.
+        const chartContainer = balanceTrendCtx.parentElement;
+        chartContainer.innerHTML = '<div class="flex justify-center items-center h-full text-gray-500">Chart data loading...</div>';
+        
+        // Simulate loading chart data
+        setTimeout(() => {
+            chartContainer.innerHTML = '<div class="flex justify-center items-center h-full text-green-600"><i class="fas fa-chart-line text-5xl"></i></div>';
+        }, 1000);
+    }
+    
+    // Spending categories chart
+    const spendingCategoriesCtx = document.getElementById('spending-categories-chart');
+    
+    if (spendingCategoriesCtx) {
+        // This is a placeholder - in a real application, we'd use a charting library
+        const chartContainer = spendingCategoriesCtx.parentElement;
+        chartContainer.innerHTML = '<div class="flex justify-center items-center h-full text-gray-500">Chart data loading...</div>';
+        
+        // Simulate loading chart data
+        setTimeout(() => {
+            chartContainer.innerHTML = '<div class="flex justify-center items-center h-full text-green-600"><i class="fas fa-chart-pie text-5xl"></i></div>';
+        }, 1000);
+    }
 }
 
 /**
  * Setup card flipping effect for card details
  */
 function setupCardFlip() {
-    const cardElements = document.querySelectorAll('.card-flip');
+    const cards = document.querySelectorAll('.credit-card-container');
     
-    cardElements.forEach(card => {
-        card.addEventListener('click', function() {
-            this.classList.toggle('is-flipped');
-        });
+    cards.forEach(cardContainer => {
+        const flipButton = cardContainer.querySelector('.flip-card');
+        const card = cardContainer.querySelector('.credit-card');
+        
+        if (flipButton && card) {
+            flipButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                card.classList.toggle('is-flipped');
+                
+                // Change the button text based on the current state
+                const isFlipped = card.classList.contains('is-flipped');
+                flipButton.innerHTML = isFlipped 
+                    ? '<i class="fas fa-undo"></i> Show Front' 
+                    : '<i class="fas fa-sync"></i> Show Details';
+            });
+        }
     });
 }
 
@@ -144,76 +180,98 @@ function setupCardFlip() {
  * Setup session timeout warning for security
  */
 function setupSessionTimeout() {
-    // Session timeout in seconds (14 minutes = 840 seconds)
-    const sessionTimeout = 840;
-    const warningTime = 60; // Show warning 1 minute before timeout
+    let idleTime = 0;
+    const idleInterval = 60000; // 1 minute
+    const timeoutWarning = 15; // Warning after 15 minutes of inactivity
+    const timeoutLimit = 20; // Logout after 20 minutes of inactivity
     
-    let timeoutWarningShown = false;
-    let timeoutTimer = null;
-    
-    function resetTimer() {
-        clearTimeout(timeoutTimer);
-        timeoutWarningShown = false;
-        
-        timeoutTimer = setTimeout(function() {
-            showTimeoutWarning();
-        }, (sessionTimeout - warningTime) * 1000);
-    }
-    
-    function showTimeoutWarning() {
-        if (timeoutWarningShown) return;
-        timeoutWarningShown = true;
-        
-        const warningEl = document.createElement('div');
-        warningEl.className = 'fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50';
-        warningEl.innerHTML = `
-            <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-                <h3 class="text-xl font-bold mb-4">Session Timeout Warning</h3>
-                <p class="mb-4">Your session will expire in less than a minute due to inactivity.</p>
-                <div class="flex justify-end space-x-3">
-                    <button id="logout-btn" class="px-4 py-2 bg-gray-200 rounded">Logout</button>
-                    <button id="continue-btn" class="px-4 py-2 bg-primary-600 text-white rounded">Continue Session</button>
-                </div>
-            </div>
-        `;
-        
-        document.body.appendChild(warningEl);
-        
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            window.location.href = '/users/logout/';
-        });
-        
-        document.getElementById('continue-btn').addEventListener('click', function() {
-            document.body.removeChild(warningEl);
-            resetTimer();
-            
-            // Send a request to keep session alive
-            fetch('/api/keep-alive/', { method: 'POST', credentials: 'same-origin' });
-        });
-    }
-    
-    // Events that reset the timer
-    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
-    events.forEach(event => {
+    // Reset the idle timer on user activity
+    const resetEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    resetEvents.forEach(event => {
         document.addEventListener(event, resetTimer, true);
     });
     
-    // Initialize the timer
-    resetTimer();
+    // Check idle time every minute
+    setInterval(function() {
+        idleTime += 1;
+        
+        if (idleTime >= timeoutWarning && idleTime < timeoutLimit) {
+            showTimeoutWarning();
+        } else if (idleTime >= timeoutLimit) {
+            // Redirect to logout
+            window.location.href = '/users/logout/';
+        }
+    }, idleInterval);
+    
+    function resetTimer() {
+        idleTime = 0;
+        
+        // Hide the timeout warning if it's visible
+        const timeoutWarningEl = document.getElementById('session-timeout-warning');
+        if (timeoutWarningEl) {
+            timeoutWarningEl.classList.add('hidden');
+        }
+    }
+    
+    function showTimeoutWarning() {
+        let timeoutWarningEl = document.getElementById('session-timeout-warning');
+        
+        // Create the warning element if it doesn't exist
+        if (!timeoutWarningEl) {
+            timeoutWarningEl = document.createElement('div');
+            timeoutWarningEl.id = 'session-timeout-warning';
+            timeoutWarningEl.classList.add(
+                'fixed', 'bottom-4', 'right-4', 'bg-yellow-100', 
+                'border-l-4', 'border-yellow-500', 'text-yellow-700', 
+                'p-4', 'shadow-lg', 'rounded', 'z-50'
+            );
+            
+            timeoutWarningEl.innerHTML = `
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exclamation-triangle text-yellow-600"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium">
+                            Your session is about to expire due to inactivity.
+                        </p>
+                        <p class="text-xs mt-1">
+                            You will be logged out in ${timeoutLimit - timeoutWarning} minutes.
+                        </p>
+                        <div class="mt-2">
+                            <button type="button" id="extend-session" class="text-sm font-medium text-yellow-700 hover:text-yellow-600">
+                                Click here to stay logged in
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(timeoutWarningEl);
+            
+            // Add event listener to the "stay logged in" button
+            document.getElementById('extend-session').addEventListener('click', function() {
+                resetTimer();
+                timeoutWarningEl.classList.add('hidden');
+            });
+        } else {
+            timeoutWarningEl.classList.remove('hidden');
+        }
+    }
 }
 
 /**
  * Setup mobile navigation for responsive design
  */
 function setupMobileNavigation() {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     
-    if (!mobileMenuButton || !mobileMenu) return;
-    
-    mobileMenuButton.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-    });
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
 }
 
 /**
@@ -246,12 +304,15 @@ function formatCurrency(amount, currency = 'USD') {
  * @return {string} The formatted date string
  */
 function formatDate(dateString) {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    }).format(date);
+    const options = { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    
+    return new Date(dateString).toLocaleDateString('en-US', options);
 }
 
 /**
@@ -263,19 +324,28 @@ function formatDate(dateString) {
  */
 function validateField(field, validator, errorMessage) {
     const isValid = validator(field.value);
-    const errorElement = field.nextElementSibling;
     
     if (!isValid) {
+        // Create or update error message
+        let errorElement = field.nextElementSibling;
+        
+        if (!errorElement || !errorElement.classList.contains('error-message')) {
+            errorElement = document.createElement('p');
+            errorElement.classList.add('error-message', 'text-red-500', 'text-xs', 'mt-1');
+            field.parentNode.insertBefore(errorElement, field.nextSibling);
+        }
+        
+        errorElement.textContent = errorMessage;
         field.classList.add('border-red-500');
-        if (errorElement && errorElement.classList.contains('error-message')) {
-            errorElement.textContent = errorMessage;
-            errorElement.classList.remove('hidden');
-        }
     } else {
-        field.classList.remove('border-red-500');
+        // Remove error message if it exists
+        const errorElement = field.nextElementSibling;
+        
         if (errorElement && errorElement.classList.contains('error-message')) {
-            errorElement.classList.add('hidden');
+            errorElement.remove();
         }
+        
+        field.classList.remove('border-red-500');
     }
     
     return isValid;
