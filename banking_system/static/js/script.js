@@ -1,390 +1,282 @@
 /**
- * SecureBank - Main JavaScript File
- * Contains client-side functionality for the banking system application
+ * SecureBank - Main JavaScript file
+ * This file contains custom JavaScript for the banking application
  */
 
-// Execute when DOM is fully loaded
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize tooltips
     initializeTooltips();
     
-    // Initialize popovers
-    initializePopovers();
+    // Add event listeners for transaction filters
+    setupTransactionFilters();
     
-    // Initialize session timeout warning
-    initializeSessionTimeout();
+    // Setup PIN input behavior
+    setupPinInputs();
     
-    // Initialize transaction data table (if present)
-    initializeDataTables();
+    // Setup chart visualizations if present
+    setupCharts();
     
-    // Initialize form validation
-    initializeFormValidation();
+    // Setup card flipping effect
+    setupCardFlip();
     
-    // Initialize card copy functionality
-    initializeCardCopy();
+    // Setup session timeout warning
+    setupSessionTimeout();
     
-    // Handle alert dismissal
-    initializeAlertDismissal();
+    // Setup responsive navigation
+    setupMobileNavigation();
 });
 
 /**
- * Initialize Bootstrap tooltips
+ * Initialize tooltips for enhanced UI
  */
 function initializeTooltips() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function(tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-}
-
-/**
- * Initialize Bootstrap popovers
- */
-function initializePopovers() {
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-    popoverTriggerList.map(function(popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl);
-    });
-}
-
-/**
- * Initialize alert dismissal with fade out
- */
-function initializeAlertDismissal() {
-    // Auto-dismiss success alerts after 5 seconds
-    setTimeout(function() {
-        var successAlerts = document.querySelectorAll('.alert-success');
-        successAlerts.forEach(function(alert) {
-            var bsAlert = new bootstrap.Alert(alert);
-            setTimeout(function() {
-                bsAlert.close();
-            }, 5000);
-        });
-    }, 500);
-
-    // Handle manual alert dismissal
-    document.querySelectorAll('.alert .btn-close').forEach(function(button) {
-        button.addEventListener('click', function() {
-            var alert = this.closest('.alert');
-            alert.style.opacity = '0';
-            setTimeout(function() {
-                alert.style.display = 'none';
-            }, 300);
-        });
-    });
-}
-
-/**
- * Initialize datatable functionality if table exists
- */
-function initializeDataTables() {
-    var transactionTable = document.getElementById('transactionTable');
-    if (transactionTable) {
-        // Add simple search functionality to transaction table
-        var searchInput = document.createElement('input');
-        searchInput.type = 'text';
-        searchInput.classList.add('form-control', 'mb-3');
-        searchInput.placeholder = 'Search transactions...';
-        transactionTable.parentNode.insertBefore(searchInput, transactionTable);
-        
-        searchInput.addEventListener('keyup', function() {
-            var searchTerm = this.value.toLowerCase();
-            var rows = transactionTable.querySelectorAll('tbody tr');
+    const tooltips = document.querySelectorAll('[data-tooltip]');
+    tooltips.forEach(tooltip => {
+        tooltip.addEventListener('mouseenter', function(e) {
+            const tooltipText = this.getAttribute('data-tooltip');
+            const tooltipEl = document.createElement('div');
+            tooltipEl.className = 'tooltip bg-gray-800 text-white px-2 py-1 rounded text-sm absolute z-50';
+            tooltipEl.textContent = tooltipText;
+            document.body.appendChild(tooltipEl);
             
-            rows.forEach(function(row) {
-                var text = row.textContent.toLowerCase();
-                if (text.indexOf(searchTerm) > -1) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
+            const rect = this.getBoundingClientRect();
+            tooltipEl.style.top = rect.bottom + 10 + 'px';
+            tooltipEl.style.left = rect.left + (rect.width / 2) - (tooltipEl.offsetWidth / 2) + 'px';
+            
+            this.addEventListener('mouseleave', function() {
+                document.body.removeChild(tooltipEl);
+            }, { once: true });
+        });
+    });
+}
+
+/**
+ * Setup transaction filtering functionality
+ */
+function setupTransactionFilters() {
+    const filterForm = document.getElementById('transaction-filter-form');
+    if (!filterForm) return;
+    
+    const filterInputs = filterForm.querySelectorAll('input, select');
+    filterInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            filterForm.submit();
+        });
+    });
+    
+    const dateRangeSelect = document.getElementById('date-range');
+    const customDateFields = document.getElementById('custom-date-fields');
+    
+    if (dateRangeSelect && customDateFields) {
+        dateRangeSelect.addEventListener('change', function() {
+            if (this.value === 'custom') {
+                customDateFields.classList.remove('hidden');
+            } else {
+                customDateFields.classList.add('hidden');
+            }
+        });
+    }
+}
+
+/**
+ * Setup PIN input behavior for secure entry
+ */
+function setupPinInputs() {
+    const pinInputs = document.querySelectorAll('.pin-input');
+    
+    pinInputs.forEach(input => {
+        // Only allow numbers
+        input.addEventListener('keypress', function(e) {
+            if (!/\d/.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+        
+        // Auto-focus next input
+        input.addEventListener('input', function() {
+            if (this.value.length >= this.maxLength) {
+                const nextInput = this.nextElementSibling;
+                if (nextInput && nextInput.classList.contains('pin-input')) {
+                    nextInput.focus();
                 }
-            });
+            }
         });
-    }
+        
+        // Handle backspace
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value.length === 0) {
+                const prevInput = this.previousElementSibling;
+                if (prevInput && prevInput.classList.contains('pin-input')) {
+                    prevInput.focus();
+                }
+            }
+        });
+    });
 }
 
 /**
- * Initialize session timeout warning
- * Shows a warning before the session expires
+ * Setup charts for data visualization
  */
-function initializeSessionTimeout() {
-    // Check if user is logged in by looking for logout link
-    var logoutLink = document.querySelector('a[href*="logout"]');
-    if (!logoutLink) {
-        return; // User not logged in, no need for timeout warning
+function setupCharts() {
+    const transactionChartElement = document.getElementById('transaction-chart');
+    if (!transactionChartElement) return;
+    
+    // This is a placeholder function that would typically use a charting library like Chart.js
+    // In a production environment, you would include Chart.js and implement proper charts
+    console.log('Chart visualization would be initialized here');
+}
+
+/**
+ * Setup card flipping effect for card details
+ */
+function setupCardFlip() {
+    const cardElements = document.querySelectorAll('.card-flip');
+    
+    cardElements.forEach(card => {
+        card.addEventListener('click', function() {
+            this.classList.toggle('is-flipped');
+        });
+    });
+}
+
+/**
+ * Setup session timeout warning for security
+ */
+function setupSessionTimeout() {
+    // Session timeout in seconds (14 minutes = 840 seconds)
+    const sessionTimeout = 840;
+    const warningTime = 60; // Show warning 1 minute before timeout
+    
+    let timeoutWarningShown = false;
+    let timeoutTimer = null;
+    
+    function resetTimer() {
+        clearTimeout(timeoutTimer);
+        timeoutWarningShown = false;
+        
+        timeoutTimer = setTimeout(function() {
+            showTimeoutWarning();
+        }, (sessionTimeout - warningTime) * 1000);
     }
     
-    // Session timeout warning (13 minutes, with 2 minutes warning before 15-minute server timeout)
-    var warningTime = 13 * 60 * 1000; // 13 minutes
-    
-    var timeoutWarning = setTimeout(function() {
-        // Create modal if it doesn't exist
-        var modalId = 'sessionTimeoutModal';
-        var modal = document.getElementById(modalId);
+    function showTimeoutWarning() {
+        if (timeoutWarningShown) return;
+        timeoutWarningShown = true;
         
-        if (!modal) {
-            // Create the modal
-            modal = document.createElement('div');
-            modal.id = modalId;
-            modal.className = 'modal fade';
-            modal.tabIndex = '-1';
-            modal.setAttribute('aria-labelledby', 'sessionTimeoutModalLabel');
-            modal.setAttribute('aria-hidden', 'true');
-            
-            modal.innerHTML = `
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header bg-warning text-dark">
-                            <h5 class="modal-title" id="sessionTimeoutModalLabel">
-                                <i class="fas fa-exclamation-triangle me-2"></i>Session Timeout Warning
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Your session is about to expire due to inactivity. You will be logged out in <span id="sessionCountdown">120</span> seconds.</p>
-                            <p>Do you want to continue your session?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Log Out Now</button>
-                            <button type="button" class="btn btn-primary" id="extendSession">Continue Session</button>
-                        </div>
-                    </div>
+        const warningEl = document.createElement('div');
+        warningEl.className = 'fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50';
+        warningEl.innerHTML = `
+            <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+                <h3 class="text-xl font-bold mb-4">Session Timeout Warning</h3>
+                <p class="mb-4">Your session will expire in less than a minute due to inactivity.</p>
+                <div class="flex justify-end space-x-3">
+                    <button id="logout-btn" class="px-4 py-2 bg-gray-200 rounded">Logout</button>
+                    <button id="continue-btn" class="px-4 py-2 bg-primary-600 text-white rounded">Continue Session</button>
                 </div>
-            `;
-            
-            document.body.appendChild(modal);
-            
-            // Add event listener to the extend session button
-            document.getElementById('extendSession').addEventListener('click', function() {
-                refreshSession();
-                var bsModal = bootstrap.Modal.getInstance(modal);
-                bsModal.hide();
-            });
-        }
+            </div>
+        `;
         
-        // Show the modal
-        var bsModal = new bootstrap.Modal(modal);
-        bsModal.show();
+        document.body.appendChild(warningEl);
         
-        // Start countdown
-        var secondsLeft = 120;
-        var countdownEl = document.getElementById('sessionCountdown');
-        
-        var countdownInterval = setInterval(function() {
-            secondsLeft--;
-            if (countdownEl) {
-                countdownEl.textContent = secondsLeft;
-            }
-            
-            if (secondsLeft <= 0) {
-                clearInterval(countdownInterval);
-                window.location.href = logoutLink.href; // Redirect to logout
-            }
-        }, 1000);
-        
-        // Clear interval if modal is closed
-        modal.addEventListener('hidden.bs.modal', function() {
-            clearInterval(countdownInterval);
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            window.location.href = '/users/logout/';
         });
         
-    }, warningTime);
+        document.getElementById('continue-btn').addEventListener('click', function() {
+            document.body.removeChild(warningEl);
+            resetTimer();
+            
+            // Send a request to keep session alive
+            fetch('/api/keep-alive/', { method: 'POST', credentials: 'same-origin' });
+        });
+    }
     
-    // Reset timeout warning on user activity
-    var events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    // Events that reset the timer
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    events.forEach(event => {
+        document.addEventListener(event, resetTimer, true);
+    });
     
-    events.forEach(function(event) {
-        document.addEventListener(event, function() {
-            clearTimeout(timeoutWarning);
-            timeoutWarning = setTimeout(function() {
-                // Show warning modal
-                var modal = document.getElementById('sessionTimeoutModal');
-                if (modal) {
-                    var bsModal = new bootstrap.Modal(modal);
-                    bsModal.show();
-                }
-            }, warningTime);
-        }, false);
+    // Initialize the timer
+    resetTimer();
+}
+
+/**
+ * Setup mobile navigation for responsive design
+ */
+function setupMobileNavigation() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (!mobileMenuButton || !mobileMenu) return;
+    
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
     });
 }
 
 /**
- * Refresh the user session by making a request to the server
+ * Show a confirmation dialog
+ * @param {string} message - The confirmation message to display
+ * @param {function} callback - The callback function to execute if confirmed
  */
-function refreshSession() {
-    // Make AJAX request to refresh CSRF token
-    fetch(window.location.href, {
-        method: 'GET',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-        }
-    }).then(function(response) {
-        if (response.ok) {
-            console.log('Session refreshed successfully');
-        }
-    }).catch(function(error) {
-        console.error('Error refreshing session:', error);
-    });
-}
-
-/**
- * Initialize form validation
- */
-function initializeFormValidation() {
-    var forms = document.querySelectorAll('form');
-    
-    forms.forEach(function(form) {
-        // Add submit event listener
-        form.addEventListener('submit', function(event) {
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            
-            // Mark all fields as validated
-            form.classList.add('was-validated');
-        }, false);
-        
-        // Check password fields for match
-        var password1 = form.querySelector('input[name="password1"]');
-        var password2 = form.querySelector('input[name="password2"]');
-        
-        if (password1 && password2) {
-            password2.addEventListener('input', function() {
-                if (password1.value !== password2.value) {
-                    password2.setCustomValidity('Passwords do not match');
-                } else {
-                    password2.setCustomValidity('');
-                }
-            });
-            
-            password1.addEventListener('input', function() {
-                if (password2.value && password1.value !== password2.value) {
-                    password2.setCustomValidity('Passwords do not match');
-                } else {
-                    password2.setCustomValidity('');
-                }
-            });
-        }
-        
-        // PIN validation
-        var pinInputs = form.querySelectorAll('input[name$="pin"]');
-        pinInputs.forEach(function(input) {
-            input.addEventListener('input', function() {
-                var value = this.value;
-                
-                // Clean input - only digits allowed
-                if (/[^0-9]/.test(value)) {
-                    this.value = value.replace(/[^0-9]/g, '');
-                }
-                
-                // Check length
-                if (value.length !== 4) {
-                    this.setCustomValidity('PIN must be exactly 4 digits');
-                } else {
-                    this.setCustomValidity('');
-                }
-            });
-        });
-        
-        // Amount validation
-        var amountInputs = form.querySelectorAll('input[name="amount"]');
-        amountInputs.forEach(function(input) {
-            input.addEventListener('input', function() {
-                var value = parseFloat(this.value);
-                
-                if (isNaN(value) || value <= 0) {
-                    this.setCustomValidity('Amount must be greater than zero');
-                } else {
-                    this.setCustomValidity('');
-                }
-            });
-        });
-    });
-}
-
-/**
- * Initialize copy functionality for card details
- */
-function initializeCardCopy() {
-    var copyButtons = document.querySelectorAll('.copy-btn');
-    
-    copyButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            var textToCopy = this.getAttribute('data-copy');
-            var originalText = this.innerHTML;
-            
-            // Create temporary input element
-            var tempInput = document.createElement('input');
-            tempInput.value = textToCopy;
-            document.body.appendChild(tempInput);
-            
-            // Select and copy text
-            tempInput.select();
-            document.execCommand('copy');
-            
-            // Remove temporary element
-            document.body.removeChild(tempInput);
-            
-            // Update button text
-            this.innerHTML = '<i class="fas fa-check"></i> Copied';
-            
-            // Reset button text after 2 seconds
-            setTimeout(function() {
-                button.innerHTML = originalText;
-            }, 2000);
-        });
-    });
-}
-
-/**
- * Toggle password/PIN visibility
- * @param {string} inputId - ID of the input element
- * @param {string} toggleId - ID of the toggle button
- */
-function togglePasswordVisibility(inputId, toggleId) {
-    var input = document.getElementById(inputId);
-    var toggle = document.getElementById(toggleId);
-    
-    if (input && toggle) {
-        if (input.type === 'password') {
-            input.type = 'text';
-            toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
-        } else {
-            input.type = 'password';
-            toggle.innerHTML = '<i class="fas fa-eye"></i>';
-        }
+function confirmAction(message, callback) {
+    if (window.confirm(message)) {
+        callback();
     }
 }
 
 /**
- * Format currency input to show proper decimal places
- * @param {object} input - Input element
+ * Format currency for display
+ * @param {number} amount - The amount to format
+ * @param {string} currency - The currency code (default: USD)
+ * @return {string} The formatted currency string
  */
-function formatCurrency(input) {
-    var value = input.value.replace(/[^\d.]/g, '');
-    
-    // Ensure only one decimal point
-    var parts = value.split('.');
-    if (parts.length > 2) {
-        value = parts[0] + '.' + parts.slice(1).join('');
-    }
-    
-    // Format to 2 decimal places if there's a decimal point
-    if (value.includes('.')) {
-        var decimalPart = parts[1] || '';
-        if (decimalPart.length > 2) {
-            value = parts[0] + '.' + decimalPart.substring(0, 2);
-        }
-    }
-    
-    input.value = value;
+function formatCurrency(amount, currency = 'USD') {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currency
+    }).format(amount);
 }
 
 /**
- * Show a confirmation dialog before proceeding with an action
- * @param {string} message - Confirmation message to show
- * @returns {boolean} - True if confirmed, false otherwise
+ * Format date for display
+ * @param {string} dateString - The date string to format
+ * @return {string} The formatted date string
  */
-function confirmAction(message) {
-    return confirm(message || 'Are you sure you want to proceed?');
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }).format(date);
+}
+
+/**
+ * Validate a form field
+ * @param {HTMLElement} field - The field to validate
+ * @param {function} validator - The validation function
+ * @param {string} errorMessage - The error message to display
+ * @return {boolean} Whether the field is valid
+ */
+function validateField(field, validator, errorMessage) {
+    const isValid = validator(field.value);
+    const errorElement = field.nextElementSibling;
+    
+    if (!isValid) {
+        field.classList.add('border-red-500');
+        if (errorElement && errorElement.classList.contains('error-message')) {
+            errorElement.textContent = errorMessage;
+            errorElement.classList.remove('hidden');
+        }
+    } else {
+        field.classList.remove('border-red-500');
+        if (errorElement && errorElement.classList.contains('error-message')) {
+            errorElement.classList.add('hidden');
+        }
+    }
+    
+    return isValid;
 }

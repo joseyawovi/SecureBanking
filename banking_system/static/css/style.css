@@ -1,309 +1,182 @@
-/* 
- * SecureBank - Custom CSS Styles
- * Main stylesheet for the banking system application
- */
+/* Main styles for the SecureBank application */
 
-/* ========== General Styling ========== */
+/* Tailwind CSS Integration */
+/* This file contains custom styles beyond what Tailwind provides */
+
+/* Custom colors for our green theme */
 :root {
-    --primary-color: #4a6bdf;
-    --primary-dark: #3a55b4;
-    --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --info-color: #17a2b8;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
-    --white: #ffffff;
-    --body-bg: #f5f8fc;
-    --card-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --primary-50: #effdf5;
+  --primary-100: #dcfce9;
+  --primary-200: #bbf7d0;
+  --primary-300: #86efac;
+  --primary-400: #4ade80;
+  --primary-500: #22c55e;
+  --primary-600: #16a34a;
+  --primary-700: #15803d;
+  --primary-800: #166534;
+  --primary-900: #14532d;
+  --primary-950: #052e16;
 }
 
-body {
-    background-color: var(--body-bg);
-    color: #444;
-    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-    line-height: 1.6;
-    padding-bottom: 60px;
+/* Apply custom styles */
+.bg-primary-50 { background-color: var(--primary-50); }
+.bg-primary-100 { background-color: var(--primary-100); }
+.bg-primary-200 { background-color: var(--primary-200); }
+.bg-primary-300 { background-color: var(--primary-300); }
+.bg-primary-400 { background-color: var(--primary-400); }
+.bg-primary-500 { background-color: var(--primary-500); }
+.bg-primary-600 { background-color: var(--primary-600); }
+.bg-primary-700 { background-color: var(--primary-700); }
+.bg-primary-800 { background-color: var(--primary-800); }
+.bg-primary-900 { background-color: var(--primary-900); }
+.bg-primary-950 { background-color: var(--primary-950); }
+
+.text-primary-50 { color: var(--primary-50); }
+.text-primary-100 { color: var(--primary-100); }
+.text-primary-200 { color: var(--primary-200); }
+.text-primary-300 { color: var(--primary-300); }
+.text-primary-400 { color: var(--primary-400); }
+.text-primary-500 { color: var(--primary-500); }
+.text-primary-600 { color: var(--primary-600); }
+.text-primary-700 { color: var(--primary-700); }
+.text-primary-800 { color: var(--primary-800); }
+.text-primary-900 { color: var(--primary-900); }
+.text-primary-950 { color: var(--primary-950); }
+
+.border-primary-50 { border-color: var(--primary-50); }
+.border-primary-100 { border-color: var(--primary-100); }
+.border-primary-200 { border-color: var(--primary-200); }
+.border-primary-300 { border-color: var(--primary-300); }
+.border-primary-400 { border-color: var(--primary-400); }
+.border-primary-500 { border-color: var(--primary-500); }
+.border-primary-600 { border-color: var(--primary-600); }
+.border-primary-700 { border-color: var(--primary-700); }
+.border-primary-800 { border-color: var(--primary-800); }
+.border-primary-900 { border-color: var(--primary-900); }
+.border-primary-950 { border-color: var(--primary-950); }
+
+.from-primary-50 { --tw-gradient-from: var(--primary-50); }
+.from-primary-100 { --tw-gradient-from: var(--primary-100); }
+.from-primary-200 { --tw-gradient-from: var(--primary-200); }
+.from-primary-300 { --tw-gradient-from: var(--primary-300); }
+.from-primary-400 { --tw-gradient-from: var(--primary-400); }
+.from-primary-500 { --tw-gradient-from: var(--primary-500); }
+.from-primary-600 { --tw-gradient-from: var(--primary-600); }
+.from-primary-700 { --tw-gradient-from: var(--primary-700); }
+.from-primary-800 { --tw-gradient-from: var(--primary-800); }
+.from-primary-900 { --tw-gradient-from: var(--primary-900); }
+.from-primary-950 { --tw-gradient-from: var(--primary-950); }
+
+.to-primary-50 { --tw-gradient-to: var(--primary-50); }
+.to-primary-100 { --tw-gradient-to: var(--primary-100); }
+.to-primary-200 { --tw-gradient-to: var(--primary-200); }
+.to-primary-300 { --tw-gradient-to: var(--primary-300); }
+.to-primary-400 { --tw-gradient-to: var(--primary-400); }
+.to-primary-500 { --tw-gradient-to: var(--primary-500); }
+.to-primary-600 { --tw-gradient-to: var(--primary-600); }
+.to-primary-700 { --tw-gradient-to: var(--primary-700); }
+.to-primary-800 { --tw-gradient-to: var(--primary-800); }
+.to-primary-900 { --tw-gradient-to: var(--primary-900); }
+.to-primary-950 { --tw-gradient-to: var(--primary-950); }
+
+.hover\:bg-primary-50:hover { background-color: var(--primary-50); }
+.hover\:bg-primary-100:hover { background-color: var(--primary-100); }
+.hover\:bg-primary-200:hover { background-color: var(--primary-200); }
+.hover\:bg-primary-300:hover { background-color: var(--primary-300); }
+.hover\:bg-primary-400:hover { background-color: var(--primary-400); }
+.hover\:bg-primary-500:hover { background-color: var(--primary-500); }
+.hover\:bg-primary-600:hover { background-color: var(--primary-600); }
+.hover\:bg-primary-700:hover { background-color: var(--primary-700); }
+.hover\:bg-primary-800:hover { background-color: var(--primary-800); }
+.hover\:bg-primary-900:hover { background-color: var(--primary-900); }
+.hover\:bg-primary-950:hover { background-color: var(--primary-950); }
+
+.hover\:text-primary-50:hover { color: var(--primary-50); }
+.hover\:text-primary-100:hover { color: var(--primary-100); }
+.hover\:text-primary-200:hover { color: var(--primary-200); }
+.hover\:text-primary-300:hover { color: var(--primary-300); }
+.hover\:text-primary-400:hover { color: var(--primary-400); }
+.hover\:text-primary-500:hover { color: var(--primary-500); }
+.hover\:text-primary-600:hover { color: var(--primary-600); }
+.hover\:text-primary-700:hover { color: var(--primary-700); }
+.hover\:text-primary-800:hover { color: var(--primary-800); }
+.hover\:text-primary-900:hover { color: var(--primary-900); }
+.hover\:text-primary-950:hover { color: var(--primary-950); }
+
+/* Custom card styles */
+.card-hover {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-a {
-    color: var(--primary-color);
-    text-decoration: none;
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-a:hover {
-    color: var(--primary-dark);
-    text-decoration: underline;
-}
-
-/* ========== Typography ========== */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.text-primary {
-    color: var(--primary-color) !important;
-}
-
-.text-success {
-    color: var(--success-color) !important;
-}
-
-.text-danger {
-    color: var(--danger-color) !important;
-}
-
-.text-warning {
-    color: var(--warning-color) !important;
-}
-
-.text-info {
-    color: var(--info-color) !important;
-}
-
-/* ========== Navigation ========== */
-.navbar {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-brand {
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.navbar-dark .navbar-nav .nav-link:hover {
-    color: rgba(255, 255, 255, 1);
-}
-
-.nav-item {
-    margin-right: 5px;
-}
-
-.dropdown-menu {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    border: none;
-    border-radius: 0.25rem;
-}
-
-/* ========== Cards ========== */
-.card {
-    border: none;
-    border-radius: 0.5rem;
-    box-shadow: var(--card-shadow);
-    margin-bottom: 1.5rem;
-    overflow: hidden;
-}
-
-.card-header {
-    font-weight: 600;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.card-body {
-    padding: 1.25rem;
-}
-
-.card-footer {
-    padding: 1rem 1.25rem;
-    background-color: rgba(0, 0, 0, 0.03);
-    border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-/* Border left cards for stats */
-.card.border-left-primary {
-    border-left: 4px solid var(--primary-color);
-}
-
-.card.border-left-success {
-    border-left: 4px solid var(--success-color);
-}
-
-.card.border-left-info {
-    border-left: 4px solid var(--info-color);
-}
-
-.card.border-left-warning {
-    border-left: 4px solid var(--warning-color);
-}
-
-.card.border-left-danger {
-    border-left: 4px solid var(--danger-color);
-}
-
-/* Card hover effect */
-.card.shadow-sm:hover {
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2) !important;
-    transition: box-shadow 0.3s ease-in-out;
-}
-
-/* ========== Buttons ========== */
-.btn {
-    border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
-}
-
-.btn-outline-primary {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-}
-
-.btn-outline-primary:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-/* ========== Custom Components ========== */
-
-/* Virtual Card Styling */
-.virtual-card {
-    border-radius: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.virtual-card:hover {
-    transform: translateY(-5px);
-}
-
-/* Dashboard Feature Icons */
-.feature-icon {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 0.75rem;
-    background-color: rgba(74, 107, 223, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-}
-
-/* Account overview section */
-.account-overview {
-    padding: 1rem;
-}
-
-/* ========== Forms ========== */
-.form-control {
-    padding: 0.75rem 1rem;
-    border-radius: 0.25rem;
-    border: 1px solid #ced4da;
-}
-
-.form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(74, 107, 223, 0.25);
-}
-
-/* ========== Alerts ========== */
-.alert {
-    border-radius: 0.25rem;
-    border: none;
-    padding: 1rem;
-}
-
-.alert-dismissible .btn-close {
-    padding: 1.25rem;
-}
-
-/* ========== Tables ========== */
-.table {
-    margin-bottom: 0;
-}
-
-.table-hover tbody tr:hover {
-    background-color: rgba(74, 107, 223, 0.05);
-}
-
-.table th {
-    font-weight: 600;
-    border-top: none;
-}
-
-.table-light {
-    background-color: #f8f9fa;
-}
-
-/* ========== Badges ========== */
-.badge {
-    padding: 0.4em 0.6em;
-    font-weight: 500;
-    border-radius: 0.25rem;
-}
-
-/* ========== Lists ========== */
-.list-group-item {
-    padding: 0.75rem 1.25rem;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-/* ========== Footer ========== */
-footer {
-    background-color: var(--light-color);
-    padding: 2rem 0;
-    margin-top: 2rem;
-}
-
-/* ========== Responsive adjustments ========== */
-@media (max-width: 767.98px) {
-    .card-body {
-        padding: 1rem;
-    }
-    
-    .navbar-brand {
-        font-size: 1.2rem;
-    }
-    
-    h2 {
-        font-size: 1.5rem;
-    }
-    
-    .virtual-card {
-        font-size: 0.9rem;
-    }
-}
-
-/* ========== Animations ========== */
-.fade-in {
-    animation: fadeIn ease 0.5s;
-}
-
+/* Custom animations */
 @keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* ========== Print styles ========== */
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Custom form styles */
+.form-control:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 0.25rem rgba(34, 197, 94, 0.25);
+}
+
+/* Banking-specific styles */
+.balance-card {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-item {
+  transition: background-color 0.2s ease;
+}
+
+.transaction-item:hover {
+  background-color: var(--primary-50);
+}
+
+.credit-amount {
+  color: var(--primary-600);
+  font-weight: 600;
+}
+
+.debit-amount {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .balance-card {
+    padding: 1rem;
+  }
+}
+
+/* Print styles */
 @media print {
-    .no-print {
-        display: none !important;
-    }
-    
-    .card {
-        box-shadow: none !important;
-        border: 1px solid #ddd !important;
-    }
-    
-    body {
-        padding: 0 !important;
-        background-color: white !important;
-    }
+  .no-print {
+    display: none;
+  }
+  
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 100%;
+  }
 }
