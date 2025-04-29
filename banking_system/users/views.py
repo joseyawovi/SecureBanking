@@ -24,15 +24,38 @@ def register(request):
             
             # Send verification email (using console backend for development)
             subject = 'Verify your email address'
-            message = f'Your verification code is: {verification_code}'
-            from_email = 'noreply@bankingsystem.com'
+            message = f'''
+            Hello {user.full_name},
+            
+            Thank you for registering with SecureBank!
+            
+            Your verification code is: {verification_code}
+            
+            Please enter this code on the verification page to complete your registration.
+            
+            Best regards,
+            SecureBank Team
+            '''
+            from_email = 'noreply@securebank.com'
             recipient_list = [user.email]
             
-            send_mail(subject, message, from_email, recipient_list)
+            # Print a message to confirm we're sending email to console
+            print(f"\n{'*'*80}")
+            print(f"SENDING EMAIL TO: {user.email}")
+            print(f"FROM: {from_email}")
+            print(f"SUBJECT: {subject}")
+            print(f"MESSAGE: \n{message}")
+            print(f"{'*'*80}\n")
+            
+            try:
+                send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            except Exception as e:
+                print(f"Email error: {e}")
+                # Continue anyway since we're using console backend
             
             # Login user but restrict access until verified
             login(request, user)
-            messages.success(request, 'Registration successful! Please verify your email address.')
+            messages.success(request, 'Registration successful! Please verify your email address. The verification code has been printed to the console.')
             return redirect('users:verify_email')
     else:
         form = CustomUserCreationForm()
@@ -103,11 +126,34 @@ def resend_verification(request):
     
     # Send verification email
     subject = 'Verify your email address'
-    message = f'Your new verification code is: {verification_code}'
-    from_email = 'noreply@bankingsystem.com'
+    message = f'''
+    Hello {request.user.full_name},
+    
+    You requested a new verification code.
+    
+    Your new verification code is: {verification_code}
+    
+    Please enter this code on the verification page to complete your registration.
+    
+    Best regards,
+    SecureBank Team
+    '''
+    from_email = 'noreply@securebank.com'
     recipient_list = [request.user.email]
     
-    send_mail(subject, message, from_email, recipient_list)
+    # Print a message to confirm we're sending email to console
+    print(f"\n{'*'*80}")
+    print(f"RESENDING VERIFICATION EMAIL TO: {request.user.email}")
+    print(f"FROM: {from_email}")
+    print(f"SUBJECT: {subject}")
+    print(f"MESSAGE: \n{message}")
+    print(f"{'*'*80}\n")
     
-    messages.success(request, 'A new verification code has been sent to your email.')
+    try:
+        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+    except Exception as e:
+        print(f"Email error: {e}")
+        # Continue anyway since we're using console backend
+    
+    messages.success(request, 'A new verification code has been sent to your email. Please check the console for the verification code.')
     return redirect('users:verify_email')

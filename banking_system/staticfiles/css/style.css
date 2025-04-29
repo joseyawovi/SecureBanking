@@ -1,0 +1,189 @@
+/**
+ * SecureBank Custom CSS
+ * A modern, professional banking stylesheet
+ */
+
+/* Custom animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+    }
+}
+
+/* Card flip animation */
+.card-container {
+    perspective: 1000px;
+}
+
+.card {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* Visual enhancements */
+.hover-shadow:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.transaction-item:hover {
+    background-color: rgba(22, 163, 74, 0.05);
+}
+
+.notification-badge {
+    animation: pulse 2s infinite;
+}
+
+/* Dashboard widgets */
+.dashboard-card {
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Balance display animation */
+.balance-display .value {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Alert animations */
+[role="alert"] {
+    transition: opacity 0.3s ease;
+}
+
+/* Card styling */
+.credit-card {
+    background: linear-gradient(135deg, #16a34a 0%, #166534 100%);
+    color: white;
+    border-radius: 10px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.credit-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.1" viewBox="0 0 100 100"><path fill="white" d="M0 50 C0 22.4 22.4 0 50 0 C77.6 0 100 22.4 100 50 C100 77.6 77.6 100 50 100 C22.4 100 0 77.6 0 50 Z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right -10px top -10px;
+    background-size: 150px 150px;
+}
+
+.credit-card.debit-card {
+    background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+}
+
+/* KYC document area */
+.document-upload-area {
+    border: 2px dashed #16a34a;
+    transition: all 0.3s ease;
+}
+
+.document-upload-area:hover {
+    border-color: #22c55e;
+    background-color: rgba(22, 163, 74, 0.05);
+}
+
+/* Transaction history */
+.transaction-history-filters {
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+}
+
+.transaction-history-filters.collapsed {
+    max-height: 0;
+}
+
+/* Pin input styling */
+.pin-input {
+    letter-spacing: 0.5em;
+    text-align: center;
+}
+
+.pin-input:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+/* Charts and graphs */
+.chart-container {
+    height: 250px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+    .credit-card {
+        height: 180px;
+    }
+    
+    .dashboard-summary {
+        flex-direction: column;
+    }
+}
+
+/* Print styles for statements */
+@media print {
+    header, footer, nav, .no-print {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        color: #000;
+        background-color: #fff;
+    }
+    
+    .print-full-width {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    a {
+        text-decoration: none !important;
+        color: #000 !important;
+    }
+}
