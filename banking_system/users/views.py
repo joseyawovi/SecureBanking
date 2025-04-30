@@ -23,20 +23,21 @@ def register(request):
             user.save()
             
             # Send verification email (using console backend for development)
-            subject = 'Verify your email address'
+            subject = 'Welcome to LPU FinTrust - Verify Your Email'
             message = f'''
-            Hello {user.full_name},
+            Dear {user.full_name},
             
-            Thank you for registering with SecureBank!
+            Thank you for choosing LPU FinTrust as your trusted banking partner!
             
             Your verification code is: {verification_code}
             
             Please enter this code on the verification page to complete your registration.
+            Once verified, your account details will be sent to this email address.
             
             Best regards,
-            SecureBank Team
+            LPU FinTrust Team
             '''
-            from_email = 'noreply@securebank.com'
+            from_email = 'noreply@lpufintrust.com'
             recipient_list = [user.email]
             
             # Print a message to confirm we're sending email to console
@@ -99,10 +100,50 @@ def verify_email(request):
         if form.is_valid():
             code = form.cleaned_data['verification_code']
             if code == request.user.verification_code:
-                request.user.is_verified = True
-                request.user.verification_code = None
-                request.user.save()
-                messages.success(request, 'Email verified successfully!')
+                user = request.user
+                user.is_verified = True
+                user.verification_code = None
+                user.save()
+                
+                # Send account details email
+                account = user.account
+                subject = 'Welcome to LPU FinTrust - Your Account Details'
+                message = f'''
+                Dear {user.full_name},
+
+                Your account has been successfully verified. Here are your account details:
+
+                Account Number: {account.account_number}
+                Account Holder: {user.full_name}
+                Initial PIN: {account._generate_pin()}  # This is a one-time generated PIN
+
+                IMPORTANT: Please change your PIN immediately after your first login for security.
+
+                For assistance, contact our support team.
+
+                Best regards,
+                LPU FinTrust Team
+                '''
+                
+                print(f"\n{'*'*80}")
+                print("SENDING ACCOUNT DETAILS EMAIL")
+                print(f"TO: {user.email}")
+                print(f"SUBJECT: {subject}")
+                print(f"MESSAGE: \n{message}")
+                print(f"{'*'*80}\n")
+                
+                try:
+                    send_mail(
+                        subject,
+                        message,
+                        'noreply@lpufintrust.com',
+                        [user.email],
+                        fail_silently=False
+                    )
+                except Exception as e:
+                    print(f"Email error: {e}")
+                
+                messages.success(request, 'Email verified successfully! Check your email for account details.')
                 return redirect('dashboard:user_dashboard')
             else:
                 messages.error(request, 'Invalid verification code. Please try again.')
