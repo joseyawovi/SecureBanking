@@ -26,6 +26,28 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+/* Improved contrast for text on brand color background */
+.bg-brand, .navbar, [class*="bg-primary"] {
+  color: var(--bg-color) !important;
+}
+
+/* Ensure hero section text is readable */
+.hero-section h1, 
+.hero-section p {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Improve link contrast */
+.text-primary-600,
+.text-primary-700 {
+  color: var(--brand-dark) !important;
+}
+
+/* Improve card readability */
+.credit-card {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
 /* Forms */
 .form-control {
   border: 1px solid var(--neutral-300);
