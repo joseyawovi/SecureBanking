@@ -3,10 +3,68 @@
  * A modern, professional banking stylesheet
  */
 
+/* LPU FinTrust Custom Styles */
+:root {
+  --brand-color: #F7931E;
+  --text-color: #000000;
+  --bg-color: #FFFFFF;
+}
+
+.form-control {
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--brand-color);
+  box-shadow: 0 0 0 0.2rem rgba(247, 147, 30, 0.25);
+}
+
+.btn-primary {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+  color: var(--bg-color);
+}
+
+.btn-primary:hover {
+  background-color: #e58419;
+  border-color: #e58419;
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.alert {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.alert-info {
+  background-color: rgba(247, 147, 30, 0.1);
+  border-color: var(--brand-color);
+  color: var(--text-color);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.help-text {
+  color: #6c757d;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
 /* Custom animations */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+   from { opacity: 0; }
+   to { opacity: 1; }
 }
 
 @keyframes slideInFromRight {
