@@ -3,6 +3,16 @@
  * A modern, professional banking stylesheet
  */
 
+:root {
+  --brand-color: #F7931E;
+  --brand-dark: #e07d0e;
+  --text-color: #000000;
+  --bg-color: #FFFFFF;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+}
+
 /* Custom animations */
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -71,6 +81,101 @@
     animation: pulse 2s infinite;
 }
 
+/* Forms */
+.form-control {
+  border: 1px solid var(--neutral-300);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--brand-color);
+  box-shadow: 0 0 0 2px rgba(247, 147, 30, 0.2);
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+  color: var(--bg-color);
+  transition: all 0.2s ease;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--brand-dark);
+  border-color: var(--brand-dark);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
+/* Cards */
+.credit-card {
+  background: linear-gradient(135deg, var(--brand-color), var(--brand-dark));
+  color: var(--bg-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+
+/* Navigation */
+.navbar {
+  background-color: var(--brand-color);
+}
+
+.nav-link {
+  color: var(--bg-color);
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: rgba(255,255,255,0.9);
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color);
+}
+
+/* Dashboard cards */
+.dashboard-card {
+  background: var(--bg-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Transaction list */
+.transaction-item {
+  border-left: 4px solid var(--brand-color);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: var(--bg-color);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.transaction-item:hover {
+  background: var(--neutral-100);
+}
+
 /* Dashboard widgets */
 .dashboard-card {
     transition: all 0.3s ease;
@@ -90,36 +195,9 @@
     transition: opacity 0.3s ease;
 }
 
-/* Card styling */
-.credit-card {
-    background: linear-gradient(135deg, #16a34a 0%, #166534 100%);
-    color: white;
-    border-radius: 10px;
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-}
-
-.credit-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.1" viewBox="0 0 100 100"><path fill="white" d="M0 50 C0 22.4 22.4 0 50 0 C77.6 0 100 22.4 100 50 C100 77.6 77.6 100 50 100 C22.4 100 0 77.6 0 50 Z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right -10px top -10px;
-    background-size: 150px 150px;
-}
-
-.credit-card.debit-card {
-    background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
-}
-
 /* KYC document area */
 .document-upload-area {
-    border: 2px dashed #16a34a;
+    border: 2px dashed var(--brand-color);
     transition: all 0.3s ease;
 }
 
@@ -145,7 +223,7 @@
 }
 
 .pin-input:focus {
-    border-color: #16a34a;
+    border-color: var(--brand-color);
     box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
 }
 
