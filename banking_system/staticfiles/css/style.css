@@ -18,9 +18,11 @@ body {
 
 /* Forms and inputs */
 .form-control {
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--text-color);
   border-radius: 0.375rem;
   padding: 0.75rem 1rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .form-control:focus {
@@ -36,8 +38,9 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #e58419;
-  border-color: #e58419;
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+  opacity: 0.9;
 }
 
 /* Navigation */
@@ -46,12 +49,13 @@ body {
 }
 
 .hover\:bg-primary-700:hover {
-  background-color: #e58419 !important;
+  background-color: var(--brand-color) !important;
+  opacity: 0.9;
 }
 
 /* Cards */
 .credit-card {
-  background: linear-gradient(135deg, var(--brand-color) 0%, #e58419 100%);
+  background: var(--brand-color);
   color: var(--bg-color);
   border-radius: 0.75rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -59,9 +63,10 @@ body {
 
 /* Dashboard widgets */
 .dashboard-card {
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--text-color);
   border-radius: 0.75rem;
   transition: all 0.3s ease;
+  background-color: var(--bg-color);
 }
 
 .dashboard-card:hover {
@@ -74,11 +79,8 @@ body {
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;
-}
-
-.alert-info {
-  background-color: rgba(247, 147, 30, 0.1);
-  border-color: var(--brand-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--brand-color);
   color: var(--text-color);
 }
 
@@ -86,10 +88,12 @@ body {
 .document-upload-area {
   border: 2px dashed var(--brand-color);
   transition: all 0.3s ease;
+  background-color: var(--bg-color);
 }
 
 .document-upload-area:hover {
-  background-color: rgba(247, 147, 30, 0.05);
+  background-color: var(--bg-color);
+  border-color: var(--text-color);
 }
 
 /* Links */
@@ -98,7 +102,8 @@ a {
 }
 
 a:hover {
-  color: #e58419;
+  color: var(--brand-color);
+  opacity: 0.9;
 }
 
 /* Headings */
@@ -112,191 +117,35 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 2px solid var(--brand-color);
 }
 
+.table td {
+  color: var(--text-color);
+}
+
 /* Custom animations */
 @keyframes fadeIn {
-   from { opacity: 0; }
-   to { opacity: 1; }
-}
-
-@keyframes slideInFromRight {
-   0% {
-       transform: translateX(100%);
-   }
-   100% {
-       transform: translateX(0);
-   }
-}
-
-@keyframes pulse {
-   0% {
-       box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
-   }
-   70% {
-       box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
-   }
-   100% {
-       box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
-   }
-}
-
-/* Card flip animation */
-.card-container {
-   perspective: 1000px;
-}
-
-.card {
-   transition: transform 0.6s;
-   transform-style: preserve-3d;
-}
-
-.card.is-flipped {
-   transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-   backface-visibility: hidden;
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-}
-
-.card-back {
-   transform: rotateY(180deg);
-}
-
-/* Visual enhancements */
-.hover-shadow:hover {
-   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-   transition: all 0.3s ease;
-}
-
-.transaction-item:hover {
-   background-color: rgba(22, 163, 74, 0.05);
-}
-
-.notification-badge {
-   animation: pulse 2s infinite;
-}
-
-/* Dashboard widgets */
-.dashboard-card {
-  transition: all 0.3s ease;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-5px);
-}
-
-/* Balance display animation */
-.balance-display .value {
-  animation: fadeIn 1s ease-out;
-}
-
-/* Alert animations */
-[role="alert"] {
-  transition: opacity 0.3s ease;
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Card styling */
 .credit-card {
-    background: linear-gradient(135deg, #16a34a 0%, #166534 100%);
-    color: white;
-    border-radius: 10px;
-    height: 200px;
-    position: relative;
-    overflow: hidden;
+  background: var(--brand-color);
+  color: var(--bg-color);
+  border-radius: 10px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
 }
 
-.credit-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.1" viewBox="0 0 100 100"><path fill="white" d="M0 50 C0 22.4 22.4 0 50 0 C77.6 0 100 22.4 100 50 C100 77.6 77.6 100 50 100 C22.4 100 0 77.6 0 50 Z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right -10px top -10px;
-    background-size: 150px 150px;
+/* Visual enhancements */
+.hover-shadow:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.credit-card.debit-card {
-    background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%);
+.transaction-item:hover {
+  background-color: rgba(247, 147, 30, 0.05);
 }
-
-/* KYC document area */
-.document-upload-area {
-    border: 2px dashed #16a34a;
-    transition: all 0.3s ease;
-}
-
-.document-upload-area:hover {
-    border-color: #22c55e;
-    background-color: rgba(22, 163, 74, 0.05);
-}
-
-/* Transaction history */
-.transaction-history-filters {
-    transition: max-height 0.3s ease;
-    overflow: hidden;
-}
-
-.transaction-history-filters.collapsed {
-    max-height: 0;
-}
-
-/* Pin input styling */
-.pin-input {
-    letter-spacing: 0.5em;
-    text-align: center;
-}
-
-.pin-input:focus {
-    border-color: #16a34a;
-    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
-}
-
-/* Charts and graphs */
-.chart-container {
-    height: 250px;
-}
-
-/* Mobile responsive adjustments */
-@media (max-width: 640px) {
-    .credit-card {
-        height: 180px;
-    }
-    
-    .dashboard-summary {
-        flex-direction: column;
-    }
-}
-
-/* Print styles for statements */
-@media print {
-    header, footer, nav, .no-print {
-        display: none !important;
-    }
-    
-    body {
-        font-size: 12pt;
-        color: #000;
-        background-color: #fff;
-    }
-    
-    .print-full-width {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    a {
-        text-decoration: none !important;
-        color: #000 !important;
-    }
-}
-
 
 /* Custom classes */
 .text-brand {
@@ -309,4 +158,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .border-brand {
   border-color: var(--brand-color) !important;
+}
+
+/* Print styles */
+@media print {
+  body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+  }
+
+  a {
+    color: var(--text-color) !important;
+  }
 }
