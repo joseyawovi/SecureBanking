@@ -39,7 +39,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col">
     <!-- Navigation -->
-    <nav class="bg-primary-600 text-white shadow-md">
+    <nav class="bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -166,7 +166,7 @@
     {% endif %}
 
     <!-- Main Content -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 page-transition">
         {% block content %}{% endblock %}
     </main>
 
