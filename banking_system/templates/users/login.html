@@ -4,49 +4,128 @@
 {% block title %}Login - SecureBank{% endblock %}
 
 {% block content %}
-<div class="flex justify-center">
-    <div class="w-full max-w-md">
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div class="bg-primary-600 text-white p-4">
-                <h2 class="text-xl font-bold flex items-center">
-                    <i class="fas fa-sign-in-alt mr-2"></i>Login to Your Account
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <!-- Login Form -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-primary-600 px-6 py-4">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Welcome Back
                 </h2>
+                <p class="text-white text-sm opacity-90 mt-1">Access your secure banking dashboard</p>
             </div>
             <div class="p-6">
-                <form method="post" novalidate>
+                <form method="post" novalidate class="space-y-6">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <div class="mt-6">
-                        <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-md transition duration-200 flex justify-center items-center">
-                            <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    <div>
+                        <button type="submit" 
+                                class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Login to Your Account
                         </button>
                     </div>
                 </form>
-                <div class="mt-4 text-center">
-                    <p class="text-gray-600">Don't have an account? <a href="{% url 'users:register' %}" class="text-primary-600 hover:text-primary-700 font-medium">Register here</a></p>
+                <div class="mt-6 flex items-center justify-between">
+                    <div class="text-sm">
+                        <a href="#" class="text-primary-600 hover:text-primary-700 font-medium">
+                            Forgot your password?
+                        </a>
+                    </div>
+                    <div class="text-sm">
+                        <a href="{% url 'users:register' %}" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            Create new account
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow mt-6">
-            <div class="p-5">
-                <h3 class="text-lg font-bold text-gray-800 flex items-center mb-4">
-                    <i class="fas fa-info-circle text-primary-600 mr-2"></i>Security Tips
-                </h3>
-                <ul class="space-y-3">
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
-                        <span>Never share your login details with anyone</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
-                        <span>Use a strong, unique password</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
-                        <span>Always log out when done</span>
-                    </li>
-                </ul>
+        <!-- Security Info -->
+        <div class="space-y-6">
+            <!-- Security Tips -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-primary-600 px-4 py-3 text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt mr-2 text-xl"></i>
+                        <h2 class="font-bold">Security Guidelines</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="grid gap-4">
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-primary-100">
+                                    <i class="fas fa-key text-primary-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Strong Password</h3>
+                                <p class="mt-1 text-sm text-gray-600">Use a unique, strong password that combines letters, numbers, and special characters.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-primary-100">
+                                    <i class="fas fa-user-shield text-primary-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Keep Credentials Private</h3>
+                                <p class="mt-1 text-sm text-gray-600">Never share your login details or PIN with anyone, including bank staff.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-primary-100">
+                                    <i class="fas fa-sign-out-alt text-primary-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Secure Logout</h3>
+                                <p class="mt-1 text-sm text-gray-600">Always log out when you're done and avoid using public computers for banking.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-primary-600 px-4 py-3 text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-star mr-2 text-xl"></i>
+                        <h2 class="font-bold">Why Choose SecureBank</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="bg-primary-100 rounded-full p-4 mx-auto w-16 h-16 flex items-center justify-center mb-2">
+                                <i class="fas fa-lock text-primary-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Bank-Grade Security</h3>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-primary-100 rounded-full p-4 mx-auto w-16 h-16 flex items-center justify-center mb-2">
+                                <i class="fas fa-credit-card text-primary-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Virtual Cards</h3>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-primary-100 rounded-full p-4 mx-auto w-16 h-16 flex items-center justify-center mb-2">
+                                <i class="fas fa-exchange-alt text-primary-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Easy Transfers</h3>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-primary-100 rounded-full p-4 mx-auto w-16 h-16 flex items-center justify-center mb-2">
+                                <i class="fas fa-headset text-primary-600 text-xl"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">24/7 Support</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

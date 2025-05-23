@@ -4,99 +4,177 @@
 {% block title %}Deactivate Card - SecureBank{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-6">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'dashboard:user_dashboard' %}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'cards:card_list' %}">Cards</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'cards:card_detail' card.id %}">Card Details</a></li>
-                <li class="breadcrumb-item active">Deactivate Card</li>
-            </ol>
-        </nav>
-
-        <div class="card shadow border-danger">
-            <div class="card-header bg-danger text-white">
-                <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Deactivate Card</h5>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Deactivate Card Form -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-red-600 px-6 py-4">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-power-off mr-2"></i>Deactivate Card
+                </h2>
+                <p class="text-white text-sm opacity-90 mt-1">This action cannot be undone</p>
             </div>
-            <div class="card-body p-4">
-                <div class="text-center mb-4">
-                    <i class="fas fa-credit-card text-danger fa-5x mb-3"></i>
-                    <h4>Are you sure you want to deactivate this card?</h4>
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-red-100 mb-4">
+                        <i class="fas fa-credit-card text-red-600 text-4xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Are you sure you want to deactivate this card?</h3>
+                    <p class="text-sm text-gray-500 mt-1">This will immediately prevent any further transactions</p>
                 </div>
-                
-                <div class="alert alert-warning">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    <strong>Warning:</strong> Deactivating your card will immediately prevent any further transactions. This action cannot be undone.
-                </div>
-                
-                <div class="card bg-light mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Card Information</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Card Number:</span>
-                                <span>{{ card.masked_card_number }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Card Type:</span>
-                                <span>{{ card.get_card_type_display }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Expiry Date:</span>
-                                <span>{{ card.expiry_date|date:"m/Y" }}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Current Balance:</span>
-                                <span class="fw-bold">${{ card.balance|floatformat:2 }}</span>
-                            </li>
-                        </ul>
+
+                <!-- Card Information -->
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <h4 class="text-sm font-medium text-gray-700 mb-4">Card Information</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Card Number</span>
+                            <span class="font-mono">{{ card.masked_card_number }}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Card Type</span>
+                            <span>{{ card.get_card_type_display }}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Expiry Date</span>
+                            <span>{{ card.expiry_date|date:"m/Y" }}</span>
+                        </div>
+                        <div class="flex justify-between items-center font-medium">
+                            <span class="text-gray-600">Current Balance</span>
+                            <span class="text-lg">${{ card.balance|floatformat:2 }}</span>
+                        </div>
                     </div>
                 </div>
-                
+
                 {% if card.balance > 0 %}
-                    <div class="alert alert-danger mb-4">
-                        <i class="fas fa-exclamation-circle me-2"></i>
-                        <strong>Important:</strong> This card still has a balance of ${{ card.balance|floatformat:2 }}. It's recommended to withdraw these funds to your account before deactivating.
-                    </div>
-                    
-                    <div class="d-grid gap-2 mb-3">
-                        <a href="{% url 'cards:withdraw_from_card' card.id %}" class="btn btn-warning">
-                            <i class="fas fa-money-bill-wave me-2"></i>Withdraw Funds First
-                        </a>
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-lg mb-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-circle text-red-400 text-xl"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-red-800">Remaining Balance</h3>
+                                <div class="mt-2 text-sm text-red-700">
+                                    This card still has a balance of ${{ card.balance|floatformat:2 }}. It's recommended to withdraw these funds to your account before deactivating.
+                                </div>
+                                <div class="mt-4">
+                                    <a href="{% url 'cards:withdraw_from_card' card.id %}" 
+                                       class="inline-flex items-center px-4 py-2 border border-red-600 text-red-600 bg-white hover:bg-red-50 text-sm font-medium rounded-lg transition duration-200">
+                                        <i class="fas fa-money-bill-wave mr-2"></i>Withdraw Funds First
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 {% endif %}
-                
-                <form method="post">
+
+                <form method="post" class="space-y-4">
                     {% csrf_token %}
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-power-off me-2"></i>Deactivate Card
-                        </button>
-                        <a href="{% url 'cards:card_detail' card.id %}" class="btn btn-outline-secondary">
-                            <i class="fas fa-times me-2"></i>Cancel
-                        </a>
-                    </div>
+                    <button type="submit" 
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
+                        <i class="fas fa-power-off mr-2"></i>Deactivate Card
+                    </button>
+                    <a href="{% url 'cards:card_detail' card.id %}" 
+                       class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
+                        <i class="fas fa-times mr-2"></i>Cancel
+                    </a>
                 </form>
             </div>
         </div>
-        
-        <div class="card mt-4 shadow-sm">
-            <div class="card-header bg-light">
-                <h5 class="mb-0"><i class="fas fa-info-circle me-2 text-primary"></i>About Card Deactivation</h5>
+
+        <!-- Information Cards -->
+        <div class="space-y-6">
+            <!-- What Happens -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-primary-600 px-4 py-3 text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle mr-2 text-xl"></i>
+                        <h2 class="font-bold">What Happens Next</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="grid gap-4">
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-red-100">
+                                    <i class="fas fa-ban text-red-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-base font-medium text-gray-900">Immediate Deactivation</h3>
+                                <p class="mt-1 text-sm text-gray-600">All future transactions will be declined</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-yellow-100">
+                                    <i class="fas fa-sync-alt text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-base font-medium text-gray-900">Recurring Payments</h3>
+                                <p class="mt-1 text-sm text-gray-600">Any recurring payments will fail</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-green-100">
+                                    <i class="fas fa-wallet text-green-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-base font-medium text-gray-900">Balance Access</h3>
+                                <p class="mt-1 text-sm text-gray-600">Remaining balance can still be withdrawn</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <h6>What happens when you deactivate a card?</h6>
-                <ul>
-                    <li>The card will be immediately marked as inactive</li>
-                    <li>All future transactions attempted with this card will be declined</li>
-                    <li>Any recurring payments set up with this card will fail</li>
-                    <li>The card will still appear in your list of cards, but marked as inactive</li>
-                    <li>Remaining balance will still be accessible for withdrawal to your account</li>
-                </ul>
-                <div class="alert alert-info mt-3">
-                    <i class="fas fa-lightbulb me-2"></i>
-                    <strong>Tip:</strong> If you're deactivating due to security concerns, you may want to create a new card for future use.
+
+            <!-- Security Tips -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-yellow-500 px-4 py-3 text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt mr-2 text-xl"></i>
+                        <h2 class="font-bold">Security Tips</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-plus-circle text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900">Create New Card</span><br>
+                                Consider creating a new card for future transactions
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-history text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900">Monitor Activity</span><br>
+                                Check your transaction history for any suspicious activity
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-headset text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900">Contact Support</span><br>
+                                If you suspect fraud, contact our support team immediately
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

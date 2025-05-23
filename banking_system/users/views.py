@@ -86,6 +86,14 @@ def login_view(request):
     return render(request, 'users/login.html', {'form': form})
 
 
+import random
+from django.contrib import messages
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from .forms import EmailVerificationForm
+
 @login_required
 def verify_email(request):
     """
@@ -105,17 +113,21 @@ def verify_email(request):
                 user.verification_code = None
                 user.save()
                 
+                # Generate a random 4-digit PIN
+                initial_pin = ''.join(random.choices('0123456789', k=4))
+                user.account.set_pin(initial_pin)  # Assuming this sets the pin in the user's account
+                user.account.save()
+
                 # Send account details email
-                account = user.account
                 subject = 'Welcome to LPU FinTrust - Your Account Details'
                 message = f'''
                 Dear {user.full_name},
 
                 Your account has been successfully verified. Here are your account details:
 
-                Account Number: {account.account_number}
+                Account Number: {user.account.account_number}
                 Account Holder: {user.full_name}
-                Initial PIN: {account._generate_pin()}  # This is a one-time generated PIN
+                Initial PIN: {initial_pin}  # This is a one-time generated PIN
 
                 IMPORTANT: Please change your PIN immediately after your first login for security.
 
@@ -151,7 +163,6 @@ def verify_email(request):
         form = EmailVerificationForm()
     
     return render(request, 'users/verify_email.html', {'form': form})
-
 
 @login_required
 def resend_verification(request):

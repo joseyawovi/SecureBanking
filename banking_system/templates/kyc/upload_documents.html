@@ -4,91 +4,209 @@
 {% block title %}KYC Document Upload - SecureBank{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'dashboard:user_dashboard' %}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'kyc:kyc_status' %}">KYC Status</a></li>
-                <li class="breadcrumb-item active">Upload Documents</li>
-            </ol>
-        </nav>
-
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-id-card me-2"></i>KYC Document Upload</h5>
-            </div>
-            <div class="card-body p-4">
-                <div class="alert alert-info mb-4">
-                    <h5><i class="fas fa-info-circle me-2"></i>Know Your Customer (KYC) Verification</h5>
-                    <p class="mb-0">KYC verification is required to ensure the security of our banking system and comply with financial regulations. Your documents will be securely stored and reviewed by our team.</p>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Upload Form Card -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="bg-primary-600 px-6 py-4">
+            <h2 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-id-card mr-2"></i>Upload KYC Document
+            </h2>
+            <p class="text-white text-sm opacity-90 mt-1">Submit your identification documents for verification</p>
+        </div>
+        <div class="p-6">
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-400"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            KYC verification is required to ensure the security of our banking system and comply with financial regulations. Your documents will be securely stored and reviewed by our team.
+                        </p>
+                    </div>
                 </div>
-                
-                <form method="post" enctype="multipart/form-data" novalidate>
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ form.document_type|as_crispy_field }}
+            </div>
+
+            <form method="post" enctype="multipart/form-data" novalidate class="space-y-6">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {{ form.document_type|as_crispy_field }}
+                    {{ form.document_number|as_crispy_field }}
+                </div>
+                {{ form.document_file|as_crispy_field }}
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-triangle text-yellow-400"></i>
                         </div>
-                        <div class="col-md-6">
-                            {{ form.document_number|as_crispy_field }}
-                        </div>
-                        <div class="col-12">
-                            {{ form.document_file|as_crispy_field }}
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-yellow-800">Important Requirements</h3>
+                            <div class="mt-2 text-sm text-yellow-700">
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li>Accepted formats: PDF, PNG, JPG, JPEG</li>
+                                    <li>Maximum file size: 5MB</li>
+                                    <li>Document must be clearly legible and not expired</li>
+                                    <li>All personal information must be clearly visible</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="alert alert-warning mt-3">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        <strong>Important:</strong>
-                        <ul class="mb-0 mt-2">
-                            <li>Accepted document formats: PDF, PNG, JPG, JPEG</li>
-                            <li>Maximum file size: 5MB</li>
-                            <li>Document must be clearly legible and not expired</li>
-                            <li>All personal information must be clearly visible</li>
+                </div>
+
+                <div class="flex flex-col space-y-3">
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
+                        <i class="fas fa-upload mr-2"></i>Upload Document
+                    </button>
+                    <a href="{% url 'kyc:kyc_status' %}" class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to KYC Status
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Document Guidelines -->
+    <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Acceptable Documents -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-primary-600 px-6 py-4">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-clipboard-list mr-2"></i>Acceptable Documents
+                </h2>
+                <p class="text-white text-sm opacity-90 mt-1">List of documents we accept for verification</p>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 flex items-center mb-4">
+                            <i class="fas fa-passport text-primary-600 mr-2"></i>ID Documents
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-6 w-6 rounded-full bg-green-100">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">Passport (valid and not expired)</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-6 w-6 rounded-full bg-green-100">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">Driver's License (valid and not expired)</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-6 w-6 rounded-full bg-green-100">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">National ID Card (valid and not expired)</p>
+                            </li>
                         </ul>
                     </div>
-                    
-                    <div class="d-grid gap-2 mt-4">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-upload me-2"></i>Upload Document
-                        </button>
-                        <a href="{% url 'kyc:kyc_status' %}" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-2"></i>Back to KYC Status
-                        </a>
+
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 flex items-center mb-4">
+                            <i class="fas fa-file-invoice text-primary-600 mr-2"></i>Proof of Address
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-6 w-6 rounded-full bg-green-100">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">Utility Bill (not older than 3 months)</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-6 w-6 rounded-full bg-green-100">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">Bank Statement (not older than 3 months)</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-6 w-6 rounded-full bg-green-100">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">Government-issued document showing address</p>
+                            </li>
+                        </ul>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-        
-        <div class="card mt-4 shadow-sm">
-            <div class="card-header bg-light">
-                <h5 class="mb-0"><i class="fas fa-question-circle me-2 text-primary"></i>KYC Document Guidelines</h5>
+
+        <!-- Security Information -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-primary-600 px-6 py-4">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-shield-alt mr-2"></i>Security & Privacy
+                </h2>
+                <p class="text-white text-sm opacity-90 mt-1">How we protect your documents</p>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6 class="text-primary"><i class="fas fa-passport me-2"></i>Acceptable ID Documents:</h6>
-                        <ul>
-                            <li>Passport (valid and not expired)</li>
-                            <li>Driver's License (valid and not expired)</li>
-                            <li>National ID Card (valid and not expired)</li>
+            <div class="p-6">
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 flex items-center mb-4">
+                            <i class="fas fa-lock text-primary-600 mr-2"></i>Document Security
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100">
+                                        <i class="fas fa-lock text-blue-600"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">All documents are encrypted during transmission and storage</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100">
+                                        <i class="fas fa-user-shield text-blue-600"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">Only authorized personnel can access your documents for verification</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100">
+                                        <i class="fas fa-history text-blue-600"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">All document access is logged and monitored</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100">
+                                        <i class="fas fa-shield-alt text-blue-600"></i>
+                                    </div>
+                                </div>
+                                <p class="ml-3 text-sm text-gray-600">We follow industry-standard security practices to protect your data</p>
+                            </li>
                         </ul>
                     </div>
-                    <div class="col-md-6">
-                        <h6 class="text-primary"><i class="fas fa-file-invoice me-2"></i>Acceptable Proof of Address:</h6>
-                        <ul>
-                            <li>Utility Bill (not older than 3 months)</li>
-                            <li>Bank Statement (not older than 3 months)</li>
-                            <li>Government-issued document showing address</li>
-                        </ul>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle text-blue-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-blue-700">
+                                    <strong>Privacy Notice:</strong> Your documents are used solely for identity verification purposes and are handled in accordance with our privacy policy and data protection regulations.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="alert alert-light mt-3">
-                    <small>
-                        <i class="fas fa-lock me-2"></i>
-                        <strong>Privacy Notice:</strong> All submitted documents are encrypted and securely stored. Only authorized personnel can access your documents for verification purposes.
-                    </small>
                 </div>
             </div>
         </div>

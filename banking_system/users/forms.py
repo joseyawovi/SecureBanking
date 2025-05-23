@@ -9,22 +9,35 @@ class CustomUserCreationForm(UserCreationForm):
     Form for user registration with custom fields
     """
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'})
+        widget=forms.EmailInput(attrs={
+            'class': 'w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500',
+            'placeholder': 'Enter your email address'
+        })
     )
     full_name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your full name'})
+        widget=forms.TextInput(attrs={
+            'class': 'w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500',
+            'placeholder': 'Enter your full name'
+        })
     )
     phone_number = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your phone number'}),
-        required=False
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500',
+            'placeholder': 'Enter your phone number (optional)'
+        })
     )
     password1 = forms.CharField(
-        label="Password",
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter your password'})
+        widget=forms.PasswordInput(attrs={
+            'class': 'w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500',
+            'placeholder': 'Create a strong password'
+        })
     )
     password2 = forms.CharField(
-        label="Confirm Password",
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm your password'})
+        widget=forms.PasswordInput(attrs={
+            'class': 'w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500',
+            'placeholder': 'Confirm your password'
+        })
     )
 
     class Meta:
@@ -43,10 +56,16 @@ class CustomAuthenticationForm(AuthenticationForm):
     Form for user login with custom styling
     """
     username = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'})
+        widget=forms.EmailInput(attrs={
+            'class': 'w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500',
+            'placeholder': 'Enter your email address'
+        })
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter your password'})
+        widget=forms.PasswordInput(attrs={
+            'class': 'w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500',
+            'placeholder': 'Enter your password'
+        })
     )
 
 
@@ -55,5 +74,8 @@ class EmailVerificationForm(forms.Form):
     Form for email verification code
     """
     verification_code = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter verification code'})
+        widget=forms.TextInput(attrs={
+            'class': 'w-full rounded-lg border-gray-300 focus:border-primary-500 focus:ring-primary-500',
+            'placeholder': 'Enter the verification code sent to your email'
+        })
     )

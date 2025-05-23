@@ -4,98 +4,177 @@
 {% block title %}Withdraw from Card - SecureBank{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'dashboard:user_dashboard' %}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'cards:card_list' %}">Cards</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'cards:card_detail' card.id %}">Card Details</a></li>
-                <li class="breadcrumb-item active">Withdraw from Card</li>
-            </ol>
-        </nav>
-
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-minus-circle me-2"></i>Withdraw from Card</h5>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Withdraw Form -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-primary-600 px-6 py-4">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-minus-circle mr-2"></i>Withdraw from Card
+                </h2>
+                <p class="text-white text-sm opacity-90 mt-1">Transfer funds back to your main account</p>
             </div>
-            <div class="card-body p-4">
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <div class="card border-0 bg-light">
-                            <div class="card-body">
-                                <h6 class="mb-2 text-primary"><i class="fas fa-credit-card me-2"></i>Card Details</h6>
-                                <p class="mb-1"><strong>Card Number:</strong> {{ card.masked_card_number }}</p>
-                                <p class="mb-1"><strong>Type:</strong> {{ card.get_card_type_display }}</p>
-                                <p class="mb-0"><strong>Available Balance:</strong> ${{ card.balance|floatformat:2 }}</p>
+            <div class="p-6">
+                <!-- Card and Account Info -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-credit-card text-primary-600 mr-2"></i>
+                            <h3 class="text-sm font-medium text-gray-900">Card Details</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Card Number:</span>
+                                <span class="font-mono">{{ card.masked_card_number }}</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Type:</span>
+                                <span>{{ card.get_card_type_display }}</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Available Balance:</span>
+                                <span class="font-medium text-lg text-primary-600">${{ card.balance|floatformat:2 }}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card border-0 bg-light">
-                            <div class="card-body">
-                                <h6 class="mb-2 text-primary"><i class="fas fa-wallet me-2"></i>Account Balance</h6>
-                                <h3 class="mb-1">${{ user.account.balance|floatformat:2 }}</h3>
-                                <p class="text-muted mb-0">Current account balance</p>
-                            </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-wallet text-primary-600 mr-2"></i>
+                            <h3 class="text-sm font-medium text-gray-900">Account Balance</h3>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl font-bold text-gray-900">${{ user.account.balance|floatformat:2 }}</p>
+                            <p class="text-sm text-gray-500 mt-1">Current account balance</p>
                         </div>
                     </div>
                 </div>
 
-                <form method="post" novalidate>
+                <form method="post" novalidate class="space-y-6">
                     {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ form.amount|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form.pin|as_crispy_field }}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{ form.amount|as_crispy_field }}
+                        {{ form.pin|as_crispy_field }}
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle text-blue-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-blue-700">
+                                    Funds will be transferred from this card back to your main account. Your account PIN is required to authorize this transaction.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="alert alert-info mt-3">
-                        <i class="fas fa-info-circle me-2"></i>
-                        <span>Funds will be transferred from this card back to your main account. Your account PIN is required to authorize this transaction.</span>
-                    </div>
-                    
-                    <div class="d-grid gap-2 mt-4">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-minus-circle me-2"></i>Withdraw Funds
+
+                    <div class="flex flex-col space-y-3">
+                        <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
+                            <i class="fas fa-minus-circle mr-2"></i>Withdraw Funds
                         </button>
-                        <a href="{% url 'cards:card_detail' card.id %}" class="btn btn-outline-secondary">
-                            <i class="fas fa-times me-2"></i>Cancel
+                        <a href="{% url 'cards:card_detail' card.id %}" class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
+                            <i class="fas fa-times mr-2"></i>Cancel
                         </a>
                     </div>
                 </form>
             </div>
         </div>
-        
-        <div class="card mt-4 shadow-sm">
-            <div class="card-header bg-light">
-                <h5 class="mb-0"><i class="fas fa-info-circle me-2 text-primary"></i>About Card Withdrawals</h5>
+
+        <!-- Information Cards -->
+        <div class="space-y-6">
+            <!-- About Withdrawals -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-primary-600 px-4 py-3 text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle mr-2 text-xl"></i>
+                        <h2 class="font-bold">About Card Withdrawals</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="grid gap-4">
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-green-100">
+                                    <i class="fas fa-bolt text-green-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-base font-medium text-gray-900">Instant Transfer</h3>
+                                <p class="mt-1 text-sm text-gray-600">Funds are transferred immediately to your account</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary-100">
+                                    <i class="fas fa-sliders-h text-primary-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-base font-medium text-gray-900">Flexible Amounts</h3>
+                                <p class="mt-1 text-sm text-gray-600">Withdraw all or part of your card balance</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start bg-gray-50 rounded-lg p-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-100">
+                                    <i class="fas fa-coins text-blue-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-base font-medium text-gray-900">No Fees</h3>
+                                <p class="mt-1 text-sm text-gray-600">There are no fees for withdrawing from your virtual card</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <i class="fas fa-check-circle text-success me-2"></i>
-                        <strong>Instant Transfer:</strong> Funds are transferred immediately to your account
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fas fa-check-circle text-success me-2"></i>
-                        <strong>Full or Partial:</strong> Withdraw all or part of your card balance
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fas fa-check-circle text-success me-2"></i>
-                        <strong>No Fees:</strong> There are no fees for withdrawing from your virtual card
-                    </li>
-                    <li class="list-group-item">
-                        <i class="fas fa-exclamation-circle text-warning me-2"></i>
-                        <strong>Important:</strong> You cannot withdraw more than your available card balance
-                    </li>
-                </ul>
-                <div class="alert alert-light mt-3">
-                    <i class="fas fa-lightbulb me-2 text-warning"></i>
-                    <strong>Tip:</strong> It's a good security practice to withdraw funds from your card when you don't plan to use it for an extended period.
+
+            <!-- Security Tips -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-yellow-500 px-4 py-3 text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-lightbulb mr-2 text-xl"></i>
+                        <h2 class="font-bold">Security Tips</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-shield-alt text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900">Security Practice</span><br>
+                                Withdraw funds when you don't plan to use the card for an extended period
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-eye text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900">Monitor Balance</span><br>
+                                Always keep track of your card and account balances
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-key text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900">PIN Protection</span><br>
+                                Never share your PIN with anyone, not even bank staff
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

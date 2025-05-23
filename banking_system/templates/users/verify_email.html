@@ -4,35 +4,149 @@
 {% block title %}Verify Email - SecureBank{% endblock %}
 
 {% block content %}
-<div class="flex justify-center">
-    <div class="w-full max-w-md">
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div class="bg-primary-600 text-white p-4">
-                <h2 class="text-xl font-bold flex items-center">
-                    <i class="fas fa-envelope-open-text mr-2"></i>Verify Your Email
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <!-- Verification Form -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-primary-600 px-6 py-4">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-envelope-open-text mr-2"></i>Email Verification
                 </h2>
+                <p class="text-white text-sm opacity-90 mt-1">One last step to access your account</p>
             </div>
             <div class="p-6">
-                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6 rounded">
-                    <p class="text-blue-700 flex items-start">
-                        <i class="fas fa-info-circle mr-2 mt-1"></i>
-                        <span>A verification code has been sent to your email address: <strong>{{ user.email }}</strong><br>
-                        Please check your inbox (and spam folder) and enter the code below to verify your email.</span>
-                    </p>
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-400 text-xl"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-blue-800">Check Your Email</h3>
+                            <div class="mt-2 text-sm text-blue-700">
+                                <p>A verification code has been sent to:</p>
+                                <p class="font-medium mt-1">{{ user.email }}</p>
+                                <p class="mt-2">Please check your inbox (and spam folder) and enter the code below.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <form method="post" novalidate>
+
+                <form method="post" novalidate class="space-y-6">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <div class="mt-6">
-                        <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-md transition duration-200 flex justify-center items-center">
+                    <div>
+                        <button type="submit" 
+                                class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
                             <i class="fas fa-check-circle mr-2"></i>Verify Email
                         </button>
                     </div>
                 </form>
                 
-                <div class="mt-4 text-center">
-                    <p class="text-gray-600">Didn't receive the code? <a href="{% url 'users:resend_verification' %}" class="text-primary-600 hover:text-primary-700 font-medium">Resend verification code</a></p>
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600">
+                        Didn't receive the code? 
+                        <a href="{% url 'users:resend_verification' %}" class="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                            Resend verification code
+                            <i class="fas fa-redo-alt ml-1 text-sm"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verification Info -->
+        <div class="space-y-6">
+            <!-- What Happens Next -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-primary-600 px-4 py-3 text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-list-ol mr-2 text-xl"></i>
+                        <h2 class="font-bold">What Happens Next</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="grid gap-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 font-bold">
+                                    1
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Email Verification</h3>
+                                <p class="mt-1 text-sm text-gray-600">Enter the verification code sent to your email</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 font-bold">
+                                    2
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Account Activation</h3>
+                                <p class="mt-1 text-sm text-gray-600">Your account will be activated with initial $1000 balance</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-600 font-bold">
+                                    3
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Receive Account Details</h3>
+                                <p class="mt-1 text-sm text-gray-600">Get your account number and initial PIN via email</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Information -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-yellow-500 px-4 py-3 text-white">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle mr-2 text-xl"></i>
+                        <h2 class="font-bold">Important Information</h2>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-key text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900 block">Change Your PIN</span>
+                                Remember to change your initial PIN once you log in for security
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-clock text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900 block">Verification Code Expiry</span>
+                                The verification code is valid for a limited time
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100">
+                                    <i class="fas fa-shield-alt text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-sm text-gray-600">
+                                <span class="font-medium text-gray-900 block">Account Security</span>
+                                Complete KYC verification to unlock all banking features
+                            </p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

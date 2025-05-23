@@ -1564,3 +1564,1009 @@ WARNING 2025-04-30 09:11:43,078 log 684 139746938443456 Not Found: /static/css/s
 WARNING 2025-04-30 09:11:43,078 basehttp 684 139746938443456 "GET /static/css/style.css HTTP/1.1" 404 179
 WARNING 2025-04-30 09:11:43,404 log 684 139746946836160 Not Found: /static/js/script.js
 WARNING 2025-04-30 09:11:43,405 basehttp 684 139746946836160 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 09:32:56,084 autoreload 6612 137090771067520 Watching for file changes with StatReloader
+INFO 2025-04-30 09:33:09,301 basehttp 6612 137090683635456 "GET / HTTP/1.1" 200 25388
+WARNING 2025-04-30 09:33:09,640 log 6612 137090673149696 Not Found: /static/js/script.js
+WARNING 2025-04-30 09:33:09,641 basehttp 6612 137090673149696 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 09:33:09,668 log 6612 137090589263616 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:33:09,668 basehttp 6612 137090589263616 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 09:33:10,293 log 6612 137090683635456 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:33:10,293 basehttp 6612 137090683635456 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 09:33:12,332 log 6612 137090578777856 Not Found: /favicon.ico
+WARNING 2025-04-30 09:33:12,333 basehttp 6612 137090578777856 "GET /favicon.ico HTTP/1.1" 404 179
+ERROR 2025-04-30 09:33:15,521 log 6612 137090568292096 Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/middleware.py", line 59, in process_response
+    request.session.save()
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 121, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 70, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 196, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 63, in exists
+    return self.model.objects.filter(session_key=session_key).exists()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1293, in exists
+    return self.query.has_results(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 674, in has_results
+    return compiler.has_results()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1590, in has_results
+    return bool(self.execute_sql(SINGLE))
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1622, in execute_sql
+    cursor.execute(sql, params)
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+ERROR 2025-04-30 09:33:15,524 basehttp 6612 137090568292096 "GET /users/login/ HTTP/1.1" 500 145
+ERROR 2025-04-30 09:33:19,681 log 6612 137090673149696 Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: django_session
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/middleware.py", line 59, in process_response
+    request.session.save()
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 121, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 70, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/base.py", line 196, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/sessions/backends/db.py", line 63, in exists
+    return self.model.objects.filter(session_key=session_key).exists()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1293, in exists
+    return self.query.has_results(using=self.db)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/models/sql/query.py", line 674, in has_results
+    return compiler.has_results()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1590, in has_results
+    return bool(self.execute_sql(SINGLE))
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1622, in execute_sql
+    cursor.execute(sql, params)
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: django_session
+ERROR 2025-04-30 09:33:19,683 basehttp 6612 137090673149696 "GET /users/login/ HTTP/1.1" 500 145
+INFO 2025-04-30 09:34:21,421 basehttp 6612 137090673149696 "GET /users/login/ HTTP/1.1" 200 8803
+WARNING 2025-04-30 09:34:21,606 log 6612 137090589263616 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:34:21,606 basehttp 6612 137090589263616 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 09:34:21,620 log 6612 137090568292096 Not Found: /static/js/script.js
+WARNING 2025-04-30 09:34:21,620 basehttp 6612 137090568292096 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 09:34:21,727 log 6612 137090578777856 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:34:21,727 basehttp 6612 137090578777856 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 09:34:31,065 basehttp 6612 137090568292096 "POST /users/login/ HTTP/1.1" 200 8993
+WARNING 2025-04-30 09:34:31,191 log 6612 137090578777856 Not Found: /static/js/script.js
+WARNING 2025-04-30 09:34:31,191 basehttp 6612 137090578777856 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 09:34:31,331 log 6612 137090683635456 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:34:31,331 basehttp 6612 137090683635456 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 09:34:44,490 basehttp 6612 137090589263616 "POST /users/login/ HTTP/1.1" 200 9004
+WARNING 2025-04-30 09:34:44,695 log 6612 137090683635456 Not Found: /static/js/script.js
+WARNING 2025-04-30 09:34:44,695 basehttp 6612 137090683635456 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 09:34:44,700 log 6612 137090568292096 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:34:44,701 basehttp 6612 137090568292096 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 09:34:49,087 basehttp 6612 137090673149696 "GET /users/register/ HTTP/1.1" 200 11368
+WARNING 2025-04-30 09:34:49,365 log 6612 137090589263616 Not Found: /static/js/script.js
+WARNING 2025-04-30 09:34:49,365 basehttp 6612 137090589263616 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 09:34:49,373 log 6612 137090568292096 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:34:49,373 basehttp 6612 137090568292096 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 09:35:22,357 basehttp 6612 137090557806336 "POST /users/register/ HTTP/1.1" 302 0
+INFO 2025-04-30 09:35:23,466 basehttp 6612 137090589263616 "GET /users/verify-email/ HTTP/1.1" 200 11372
+WARNING 2025-04-30 09:35:24,844 log 6612 137090568292096 Not Found: /static/js/script.js
+WARNING 2025-04-30 09:35:24,844 basehttp 6612 137090568292096 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 09:35:24,850 log 6612 137090683635456 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:35:24,850 basehttp 6612 137090683635456 "GET /static/css/style.css HTTP/1.1" 404 179
+ERROR 2025-04-30 09:35:46,355 log 6612 137090589263616 Internal Server Error: /users/verify-email/
+Traceback (most recent call last):
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/venv/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/SecureBanking/banking_system/users/views.py", line 118, in verify_email
+    Initial PIN: {account._generate_pin()}  # This is a one-time generated PIN
+                  ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Account' object has no attribute '_generate_pin'
+ERROR 2025-04-30 09:35:46,358 basehttp 6612 137090589263616 "POST /users/verify-email/ HTTP/1.1" 500 145
+INFO 2025-04-30 09:36:53,689 basehttp 6612 137090557806336 "GET /users/verify-email/ HTTP/1.1" 302 0
+INFO 2025-04-30 09:36:53,866 basehttp 6612 137090568292096 "GET /dashboard/ HTTP/1.1" 200 21444
+WARNING 2025-04-30 09:36:54,634 log 6612 137090683635456 Not Found: /static/js/script.js
+WARNING 2025-04-30 09:36:54,634 basehttp 6612 137090683635456 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 09:36:54,641 log 6612 137090673149696 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:36:54,641 basehttp 6612 137090673149696 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 09:36:55,143 log 6612 137090589263616 Not Found: /static/css/style.css
+WARNING 2025-04-30 09:36:55,143 basehttp 6612 137090589263616 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:05:36,179 autoreload 6612 137090771067520 /workspaces/SecureBanking/banking_system/users/views.py changed, reloading.
+INFO 2025-04-30 10:05:36,520 autoreload 21245 133954908033664 Watching for file changes with StatReloader
+INFO 2025-04-30 10:05:39,661 autoreload 21245 133954908033664 /workspaces/SecureBanking/banking_system/users/views.py changed, reloading.
+INFO 2025-04-30 10:05:40,002 autoreload 21295 133961708978816 Watching for file changes with StatReloader
+INFO 2025-04-30 10:10:10,878 basehttp 21295 133961619605248 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:10:11,100 basehttp 21295 133961609119488 "GET /users/login/?next=/dashboard/ HTTP/1.1" 200 8803
+WARNING 2025-04-30 10:10:11,571 log 21295 133961598633728 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:10:11,571 basehttp 21295 133961598633728 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:10:11,582 log 21295 133961588147968 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:10:11,586 basehttp 21295 133961588147968 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:10:11,916 log 21295 133961504261888 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:10:11,916 basehttp 21295 133961504261888 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:10:15,717 basehttp 21295 133961609119488 "GET /users/register/ HTTP/1.1" 200 11368
+WARNING 2025-04-30 10:10:15,981 log 21295 133961598633728 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:10:15,981 basehttp 21295 133961598633728 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:10:16,101 log 21295 133961493776128 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:10:16,102 basehttp 21295 133961493776128 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:10:49,752 basehttp 21295 133961619605248 "POST /users/register/ HTTP/1.1" 200 11639
+WARNING 2025-04-30 10:10:49,910 log 21295 133961588147968 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:10:49,910 basehttp 21295 133961588147968 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:10:49,916 log 21295 133961609119488 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:10:49,916 basehttp 21295 133961609119488 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:11:02,978 basehttp 21295 133961609119488 "POST /users/register/ HTTP/1.1" 200 11783
+WARNING 2025-04-30 10:11:03,110 log 21295 133961588147968 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:11:03,111 basehttp 21295 133961588147968 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:11:03,124 log 21295 133961598633728 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:11:03,124 basehttp 21295 133961598633728 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:11:16,574 basehttp 21295 133961609119488 "POST /users/register/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:11:16,678 basehttp 21295 133961588147968 "GET /users/verify-email/ HTTP/1.1" 200 11373
+WARNING 2025-04-30 10:11:17,008 log 21295 133961504261888 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:11:17,012 basehttp 21295 133961504261888 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:11:17,016 log 21295 133961493776128 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:11:17,017 basehttp 21295 133961493776128 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:11:32,325 basehttp 21295 133961493776128 "POST /users/verify-email/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:11:32,415 basehttp 21295 133961504261888 "GET /dashboard/ HTTP/1.1" 200 21491
+WARNING 2025-04-30 10:11:32,539 log 21295 133961619605248 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:11:32,540 basehttp 21295 133961619605248 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:11:32,597 log 21295 133961609119488 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:11:32,598 basehttp 21295 133961609119488 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:11:49,373 basehttp 21295 133961493776128 "GET /cards/ HTTP/1.1" 200 12076
+WARNING 2025-04-30 10:11:49,603 log 21295 133961504261888 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:11:49,603 basehttp 21295 133961504261888 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:11:49,673 log 21295 133961619605248 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:11:49,673 basehttp 21295 133961619605248 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:11:52,422 basehttp 21295 133961493776128 "GET /cards/create/ HTTP/1.1" 200 14819
+WARNING 2025-04-30 10:11:52,661 log 21295 133961619605248 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:11:52,661 basehttp 21295 133961619605248 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:11:52,671 log 21295 133961609119488 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:11:52,672 basehttp 21295 133961609119488 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:12:02,346 basehttp 21295 133961609119488 "POST /cards/create/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:12:02,909 basehttp 21295 133961493776128 "GET /cards/1/ HTTP/1.1" 200 23283
+WARNING 2025-04-30 10:12:04,603 log 21295 133961588147968 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:12:04,603 basehttp 21295 133961588147968 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:12:04,608 log 21295 133961504261888 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:12:04,609 basehttp 21295 133961504261888 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:12:42,415 basehttp 21295 133961493776128 "GET /cards/1/fund/ HTTP/1.1" 200 14443
+WARNING 2025-04-30 10:12:42,735 log 21295 133961598633728 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:12:42,735 basehttp 21295 133961598633728 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:12:42,744 log 21295 133961504261888 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:12:42,745 basehttp 21295 133961504261888 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:12:58,790 basehttp 21295 133961588147968 "GET /cards/1/ HTTP/1.1" 200 22007
+INFO 2025-04-30 10:30:18,375 basehttp 21295 133961588147968 "GET /cards/1/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:30:18,603 basehttp 21295 133961598633728 "GET /users/login/?next=/cards/1/ HTTP/1.1" 200 8803
+WARNING 2025-04-30 10:30:19,916 log 21295 133961504261888 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:30:19,916 basehttp 21295 133961504261888 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:30:20,067 log 21295 133961493776128 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:30:20,067 basehttp 21295 133961493776128 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:42:50,634 autoreload 21295 133961708978816 /workspaces/SecureBanking/banking_system/users/forms.py changed, reloading.
+INFO 2025-04-30 10:42:51,244 autoreload 37040 131680982082176 Watching for file changes with StatReloader
+INFO 2025-04-30 10:43:30,914 autoreload 37040 131680982082176 /workspaces/SecureBanking/banking_system/users/forms.py changed, reloading.
+INFO 2025-04-30 10:43:31,269 autoreload 37349 138345708573312 Watching for file changes with StatReloader
+WARNING 2025-04-30 10:43:43,541 base 37349 138345619392256 Session data corrupted
+INFO 2025-04-30 10:43:43,575 basehttp 37349 138345619392256 "GET /users/login/?next=/cards/1/ HTTP/1.1" 200 13871
+WARNING 2025-04-30 10:43:44,003 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:43:44,006 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:43:44,011 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:43:44,011 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:44:36,020 basehttp 37349 138345525020416 "GET /users/register/ HTTP/1.1" 200 18426
+WARNING 2025-04-30 10:44:36,410 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:44:36,411 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:44:36,524 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:44:36,524 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:45:51,032 basehttp 37349 138345608906496 "GET /users/login/ HTTP/1.1" 200 13871
+WARNING 2025-04-30 10:45:51,705 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:45:51,707 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:45:51,711 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:45:51,712 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:46:44,920 basehttp 37349 138345514534656 "POST /users/login/ HTTP/1.1" 200 14061
+WARNING 2025-04-30 10:46:45,182 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:46:45,183 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:46:45,320 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:46:45,320 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:47:00,574 basehttp 37349 138345608906496 "POST /users/login/ HTTP/1.1" 200 14072
+WARNING 2025-04-30 10:47:00,726 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:47:00,726 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:47:00,747 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:47:00,747 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:47:12,585 basehttp 37349 138345493563136 "POST /users/login/ HTTP/1.1" 200 14072
+WARNING 2025-04-30 10:47:13,032 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:47:13,033 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:47:13,046 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:47:13,046 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:47:23,217 basehttp 37349 138345493563136 "POST /users/login/ HTTP/1.1" 200 14072
+WARNING 2025-04-30 10:47:23,342 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:47:23,343 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:47:23,362 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:47:23,362 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:47:43,142 basehttp 37349 138345525020416 "GET /users/register/ HTTP/1.1" 200 18426
+WARNING 2025-04-30 10:47:43,304 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:47:43,305 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:47:43,498 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:47:43,498 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:48:11,529 basehttp 37349 138345619392256 "POST /users/register/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:48:11,634 basehttp 37349 138345608906496 "GET /users/verify-email/ HTTP/1.1" 200 17789
+WARNING 2025-04-30 10:48:12,092 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:48:12,094 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:48:12,103 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:48:12,107 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:48:40,880 basehttp 37349 138345608906496 "POST /users/verify-email/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:48:40,996 basehttp 37349 138345514534656 "GET /dashboard/ HTTP/1.1" 200 21520
+WARNING 2025-04-30 10:48:41,415 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:48:41,415 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:48:41,421 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:48:41,421 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:48:49,332 basehttp 37349 138345608906496 "GET /cards/ HTTP/1.1" 200 12085
+WARNING 2025-04-30 10:48:49,448 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:48:49,449 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:48:49,455 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:48:49,456 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:48:51,977 basehttp 37349 138345514534656 "GET /cards/create/ HTTP/1.1" 200 14828
+WARNING 2025-04-30 10:48:52,143 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:48:52,143 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:48:52,149 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:48:52,149 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:49:05,770 basehttp 37349 138345504048896 "POST /cards/create/ HTTP/1.1" 200 14990
+WARNING 2025-04-30 10:49:05,888 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:49:05,888 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:49:05,908 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:49:05,908 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:49:25,965 basehttp 37349 138345525020416 "POST /cards/create/ HTTP/1.1" 200 14975
+WARNING 2025-04-30 10:49:26,092 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:49:26,092 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:49:26,175 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:49:26,175 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:50:06,115 basehttp 37349 138345504048896 "POST /cards/create/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:50:06,242 basehttp 37349 138345619392256 "GET /cards/2/ HTTP/1.1" 200 27506
+WARNING 2025-04-30 10:50:06,599 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:50:06,599 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:50:06,606 log 37349 138345493563136 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:50:06,606 basehttp 37349 138345493563136 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:50:25,444 basehttp 37349 138345619392256 "GET /cards/2/fund/ HTTP/1.1" 200 14452
+WARNING 2025-04-30 10:50:25,555 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:50:25,555 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:50:25,579 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:50:25,580 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:50:40,850 basehttp 37349 138345619392256 "POST /cards/2/fund/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:50:40,951 basehttp 37349 138345525020416 "GET /cards/2/ HTTP/1.1" 200 26201
+WARNING 2025-04-30 10:50:41,076 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:50:41,077 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:50:41,102 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:50:41,103 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:52:00,664 basehttp 37349 138345514534656 "GET /cards/ HTTP/1.1" 200 15615
+WARNING 2025-04-30 10:52:00,778 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:52:00,778 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:52:00,840 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:52:00,840 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:52:11,515 basehttp 37349 138345504048896 "GET /cards/create/ HTTP/1.1" 200 14828
+WARNING 2025-04-30 10:52:11,638 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:52:11,638 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:52:11,694 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:52:11,694 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:52:31,415 basehttp 37349 138345525020416 "POST /cards/create/ HTTP/1.1" 200 14990
+WARNING 2025-04-30 10:52:31,556 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:52:31,556 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:52:31,927 log 37349 138345493563136 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:52:31,927 basehttp 37349 138345493563136 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:52:47,236 basehttp 37349 138345514534656 "POST /cards/create/ HTTP/1.1" 200 14990
+WARNING 2025-04-30 10:52:47,350 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:52:47,350 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:52:47,361 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:52:47,361 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:53:03,001 basehttp 37349 138345493563136 "POST /cards/create/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:53:03,100 basehttp 37349 138345608906496 "GET /cards/3/ HTTP/1.1" 200 27508
+WARNING 2025-04-30 10:53:03,405 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:53:03,406 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:53:03,412 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:53:03,413 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:53:20,883 basehttp 37349 138345608906496 "GET /cards/3/fund/ HTTP/1.1" 200 14452
+WARNING 2025-04-30 10:53:21,014 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:53:21,015 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:53:21,023 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:53:21,023 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:53:31,915 basehttp 37349 138345619392256 "POST /cards/3/fund/ HTTP/1.1" 302 0
+INFO 2025-04-30 10:53:32,001 basehttp 37349 138345504048896 "GET /cards/3/ HTTP/1.1" 200 26203
+WARNING 2025-04-30 10:53:32,127 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:53:32,127 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:53:32,174 log 37349 138345493563136 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:53:32,175 basehttp 37349 138345493563136 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:53:39,081 basehttp 37349 138345504048896 "GET /cards/ HTTP/1.1" 200 19826
+WARNING 2025-04-30 10:53:39,177 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:53:39,178 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:53:39,203 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:53:39,203 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:54:01,564 basehttp 37349 138345493563136 "GET /cards/2/deactivate/ HTTP/1.1" 200 13681
+WARNING 2025-04-30 10:54:01,715 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:54:01,715 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:54:01,752 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:54:01,752 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:54:27,175 basehttp 37349 138345619392256 "GET /dashboard/ HTTP/1.1" 200 26775
+WARNING 2025-04-30 10:54:27,521 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:54:27,522 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:54:27,532 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:54:27,532 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:54:34,994 basehttp 37349 138345493563136 "GET /transactions/history/ HTTP/1.1" 200 15192
+WARNING 2025-04-30 10:54:35,149 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:54:35,149 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:54:35,156 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:54:35,156 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:54:49,282 basehttp 37349 138345608906496 "GET /dashboard/ HTTP/1.1" 200 26775
+WARNING 2025-04-30 10:54:49,941 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:54:49,941 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:54:49,957 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:54:49,957 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:57:39,742 basehttp 37349 138345608906496 "GET /accounts/detail/ HTTP/1.1" 200 21230
+WARNING 2025-04-30 10:57:39,931 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:57:39,931 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:57:40,040 log 37349 138345493563136 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:57:40,040 basehttp 37349 138345493563136 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:57:48,381 basehttp 37349 138345514534656 "GET /transactions/history/ HTTP/1.1" 200 15192
+WARNING 2025-04-30 10:57:48,493 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:57:48,493 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:57:48,658 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:57:48,658 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:57:52,839 basehttp 37349 138345493563136 "GET /accounts/detail/ HTTP/1.1" 200 21230
+INFO 2025-04-30 10:57:55,674 basehttp 37349 138345619392256 "GET /transactions/transfer/ HTTP/1.1" 200 16200
+WARNING 2025-04-30 10:57:55,824 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:57:55,825 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:57:55,960 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:57:55,962 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:58:23,900 basehttp 37349 138345525020416 "GET /cards/ HTTP/1.1" 200 19826
+WARNING 2025-04-30 10:58:24,732 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:58:24,734 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 10:58:24,738 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:58:24,739 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 10:58:27,124 basehttp 37349 138345493563136 "GET /kyc/status/ HTTP/1.1" 200 11847
+WARNING 2025-04-30 10:58:27,343 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:58:27,343 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:58:27,365 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:58:27,366 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:59:02,519 basehttp 37349 138345493563136 "GET /dashboard/ HTTP/1.1" 200 26775
+WARNING 2025-04-30 10:59:03,498 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:59:03,498 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:59:03,993 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:59:03,993 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:59:13,559 basehttp 37349 138345525020416 "GET /cards/ HTTP/1.1" 200 19826
+WARNING 2025-04-30 10:59:13,683 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:59:13,683 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:59:13,745 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:59:13,745 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:59:18,164 basehttp 37349 138345514534656 "GET /cards/2/withdraw/ HTTP/1.1" 200 14802
+WARNING 2025-04-30 10:59:18,335 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:59:18,335 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:59:18,345 log 37349 138345493563136 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:59:18,345 basehttp 37349 138345493563136 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:59:38,052 basehttp 37349 138345514534656 "GET /cards/3/withdraw/ HTTP/1.1" 200 14803
+WARNING 2025-04-30 10:59:38,331 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:59:38,331 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:59:38,340 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:59:38,340 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 10:59:52,397 basehttp 37349 138345525020416 "GET /cards/ HTTP/1.1" 200 19826
+INFO 2025-04-30 10:59:56,785 basehttp 37349 138345514534656 "GET /cards/create/ HTTP/1.1" 200 14828
+WARNING 2025-04-30 10:59:56,953 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 10:59:56,953 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 10:59:56,965 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 10:59:56,966 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:00:31,372 basehttp 37349 138345619392256 "POST /cards/create/ HTTP/1.1" 302 0
+INFO 2025-04-30 11:00:31,506 basehttp 37349 138345504048896 "GET /cards/4/ HTTP/1.1" 200 27506
+WARNING 2025-04-30 11:00:31,933 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:00:31,933 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:00:31,946 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:00:31,946 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:03:26,849 basehttp 37349 138345525020416 "GET / HTTP/1.1" 200 27482
+WARNING 2025-04-30 11:03:27,151 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:03:27,152 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:03:27,196 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:03:27,196 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:03:36,746 basehttp 37349 138345504048896 "GET /accounts/detail/ HTTP/1.1" 200 21230
+WARNING 2025-04-30 11:03:37,025 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:03:37,026 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 11:03:37,030 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:03:37,030 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 11:03:51,385 basehttp 37349 138345493563136 "GET /kyc/status/ HTTP/1.1" 200 11847
+WARNING 2025-04-30 11:03:51,544 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:03:51,545 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:03:51,552 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:03:51,552 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:06:00,110 basehttp 37349 138345493563136 "GET /kyc/status/ HTTP/1.1" 200 11847
+WARNING 2025-04-30 11:06:00,240 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:06:00,240 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:06:00,310 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:06:00,310 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:06:01,620 basehttp 37349 138345608906496 "GET /cards/ HTTP/1.1" 200 24034
+WARNING 2025-04-30 11:06:01,841 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:06:01,841 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:06:01,860 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:06:01,861 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:06:04,834 basehttp 37349 138345514534656 "GET /cards/4/fund/ HTTP/1.1" 200 14451
+WARNING 2025-04-30 11:06:05,009 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:06:05,009 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:06:05,031 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:06:05,032 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:11:46,328 basehttp 37349 138345525020416 "GET /cards/4/deactivate/ HTTP/1.1" 200 17300
+WARNING 2025-04-30 11:11:46,550 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:11:46,550 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:11:46,703 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:11:46,703 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:13:08,014 basehttp 37349 138345608906496 "GET /transactions/transfer/ HTTP/1.1" 200 16200
+WARNING 2025-04-30 11:13:08,279 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:13:08,280 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:13:08,784 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:13:08,784 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:31:31,381 basehttp 37349 138345525020416 "GET /transactions/transfer/ HTTP/1.1" 302 0
+INFO 2025-04-30 11:31:31,678 basehttp 37349 138345608906496 "GET /users/login/?next=/transactions/transfer/ HTTP/1.1" 200 13871
+WARNING 2025-04-30 11:31:32,774 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:31:32,775 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:31:32,779 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:31:32,779 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 11:31:33,208 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:31:33,208 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 11:32:35,797 basehttp 37349 138345514534656 "GET /users/login/?next=/transactions/transfer/ HTTP/1.1" 200 13871
+WARNING 2025-04-30 11:32:36,129 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:32:36,129 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 11:32:36,134 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:32:36,134 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 11:32:41,785 basehttp 37349 138345619392256 "POST /users/login/?next=/transactions/transfer/ HTTP/1.1" 302 0
+INFO 2025-04-30 11:32:41,871 basehttp 37349 138345504048896 "GET /dashboard/ HTTP/1.1" 200 27343
+WARNING 2025-04-30 11:32:42,182 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:32:42,182 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:32:42,188 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:32:42,189 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:32:46,549 basehttp 37349 138345619392256 "GET /transactions/transfer/ HTTP/1.1" 200 22715
+WARNING 2025-04-30 11:32:46,684 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:32:46,684 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:32:46,691 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:32:46,691 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:36:26,530 basehttp 37349 138345525020416 "GET /kyc/status/ HTTP/1.1" 200 11847
+WARNING 2025-04-30 11:36:27,630 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:36:27,630 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:36:27,706 log 37349 138345504048896 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:36:27,706 basehttp 37349 138345504048896 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:36:40,230 basehttp 37349 138345619392256 "GET /kyc/upload/ HTTP/1.1" 200 15280
+WARNING 2025-04-30 11:36:43,427 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:36:43,429 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:36:43,507 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:36:43,507 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:37:35,679 basehttp 37349 138345514534656 "POST /kyc/upload/ HTTP/1.1" 200 15888
+WARNING 2025-04-30 11:37:35,886 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:37:35,886 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:37:36,004 log 37349 138345493563136 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:37:36,005 basehttp 37349 138345493563136 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:38:01,075 basehttp 37349 138345608906496 "GET /kyc/status/ HTTP/1.1" 200 11847
+WARNING 2025-04-30 11:38:01,435 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:38:01,436 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:38:01,441 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:38:01,442 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:38:06,040 basehttp 37349 138345504048896 "GET /kyc/upload/ HTTP/1.1" 200 15280
+WARNING 2025-04-30 11:38:06,194 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:38:06,194 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:38:06,240 log 37349 138345619392256 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:38:06,240 basehttp 37349 138345619392256 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:41:46,135 basehttp 37349 138345493563136 "GET /cards/ HTTP/1.1" 200 24034
+WARNING 2025-04-30 11:41:47,675 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:41:47,676 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 11:41:47,705 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:41:47,705 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 11:46:40,007 basehttp 37349 138345504048896 "GET /dashboard/ HTTP/1.1" 200 26774
+WARNING 2025-04-30 11:46:40,554 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:46:40,554 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:46:40,564 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:46:40,565 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 11:46:44,614 basehttp 37349 138345514534656 "GET /transactions/history/ HTTP/1.1" 200 22609
+WARNING 2025-04-30 11:46:44,869 log 37349 138345493563136 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:46:44,869 basehttp 37349 138345493563136 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 11:46:44,878 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 11:46:44,878 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 11:46:45,280 log 37349 138345504048896 Not Found: /static/css/style.css
+WARNING 2025-04-30 11:46:45,281 basehttp 37349 138345504048896 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 12:05:28,460 basehttp 37349 138345514534656 "GET / HTTP/1.1" 200 25388
+WARNING 2025-04-30 12:05:28,843 log 37349 138345608906496 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:05:28,844 basehttp 37349 138345608906496 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:05:29,299 log 37349 138345493563136 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:05:29,300 basehttp 37349 138345493563136 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:05:43,359 basehttp 37349 138345504048896 "GET /users/login/ HTTP/1.1" 200 13871
+WARNING 2025-04-30 12:05:43,627 log 37349 138345619392256 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:05:43,628 basehttp 37349 138345619392256 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:05:43,804 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:05:43,805 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:05:51,538 basehttp 37349 138345619392256 "POST /users/login/ HTTP/1.1" 302 0
+INFO 2025-04-30 12:05:51,643 basehttp 37349 138345525020416 "GET /dashboard/ HTTP/1.1" 200 27343
+WARNING 2025-04-30 12:05:51,845 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:05:51,847 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:05:51,852 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:05:51,852 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:05:58,421 basehttp 37349 138345525020416 "GET /cards/ HTTP/1.1" 200 24034
+WARNING 2025-04-30 12:05:58,585 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:05:58,585 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:05:58,591 log 37349 138345608906496 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:05:58,591 basehttp 37349 138345608906496 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:07:05,549 basehttp 37349 138345608906496 "GET /kyc/status/ HTTP/1.1" 200 15032
+WARNING 2025-04-30 12:07:05,810 log 37349 138345525020416 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:07:05,810 basehttp 37349 138345525020416 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:07:05,817 log 37349 138345514534656 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:07:05,817 basehttp 37349 138345514534656 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:07:10,431 basehttp 37349 138345619392256 "GET /kyc/upload/ HTTP/1.1" 200 15280
+WARNING 2025-04-30 12:07:10,629 log 37349 138345514534656 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:07:10,629 basehttp 37349 138345514534656 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:07:10,647 log 37349 138345525020416 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:07:10,647 basehttp 37349 138345525020416 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:47:44,399 autoreload 3016 131869917434496 Watching for file changes with StatReloader
+INFO 2025-04-30 12:47:59,376 basehttp 3016 131869830022912 "GET / HTTP/1.1" 200 25388
+WARNING 2025-04-30 12:47:59,828 log 3016 131869819537152 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:47:59,829 basehttp 3016 131869819537152 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:47:59,872 log 3016 131869809051392 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:47:59,874 basehttp 3016 131869809051392 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:48:11,980 basehttp 3016 131869720971008 "GET /users/login/ HTTP/1.1" 200 13871
+WARNING 2025-04-30 12:48:12,322 log 3016 131869819537152 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:48:12,322 basehttp 3016 131869819537152 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 12:48:12,333 log 3016 131869830022912 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:48:12,333 basehttp 3016 131869830022912 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 12:48:14,752 basehttp 3016 131869809051392 "POST /users/login/ HTTP/1.1" 302 0
+INFO 2025-04-30 12:48:15,017 basehttp 3016 131869710485248 "GET /dashboard/ HTTP/1.1" 200 27343
+WARNING 2025-04-30 12:48:15,166 log 3016 131869720971008 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:48:15,167 basehttp 3016 131869720971008 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:48:15,312 log 3016 131869699999488 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:48:15,314 basehttp 3016 131869699999488 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:48:19,389 basehttp 3016 131869830022912 "GET /cards/ HTTP/1.1" 200 24034
+WARNING 2025-04-30 12:48:19,926 log 3016 131869819537152 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:48:19,927 basehttp 3016 131869819537152 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:48:20,276 log 3016 131869809051392 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:48:20,277 basehttp 3016 131869809051392 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:49:33,297 basehttp 3016 131869699999488 "GET /dashboard/ HTTP/1.1" 200 26774
+WARNING 2025-04-30 12:49:33,543 log 3016 131869710485248 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:49:33,544 basehttp 3016 131869710485248 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-04-30 12:49:33,553 log 3016 131869809051392 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:49:33,553 basehttp 3016 131869809051392 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-04-30 12:51:01,576 basehttp 3016 131869699999488 "GET /transactions/history/ HTTP/1.1" 200 22609
+WARNING 2025-04-30 12:51:01,705 log 3016 131869710485248 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:51:01,707 basehttp 3016 131869710485248 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:51:01,744 log 3016 131869809051392 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:51:01,746 basehttp 3016 131869809051392 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-04-30 12:53:04,942 basehttp 3016 131869809051392 "GET /kyc/status/ HTTP/1.1" 200 15032
+WARNING 2025-04-30 12:53:05,260 log 3016 131869710485248 Not Found: /static/css/style.css
+WARNING 2025-04-30 12:53:05,261 basehttp 3016 131869710485248 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-04-30 12:53:05,366 log 3016 131869699999488 Not Found: /static/js/script.js
+WARNING 2025-04-30 12:53:05,367 basehttp 3016 131869699999488 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-01 03:56:08,543 autoreload 2565 123641785025152 Watching for file changes with StatReloader
+INFO 2025-05-01 03:56:25,647 basehttp 2565 123641696093952 "GET / HTTP/1.1" 200 25388
+WARNING 2025-05-01 03:56:26,064 log 2565 123641685608192 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:56:26,065 basehttp 2565 123641685608192 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-01 03:56:26,073 log 2565 123641675122432 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:56:26,075 basehttp 2565 123641675122432 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-01 03:56:26,300 log 2565 123641664636672 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:56:26,300 basehttp 2565 123641664636672 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-01 03:57:04,188 basehttp 2565 123641685608192 "GET /users/login/ HTTP/1.1" 200 13871
+WARNING 2025-05-01 03:57:08,637 log 2565 123641675122432 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:57:08,638 basehttp 2565 123641675122432 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:08,644 log 2565 123641654150912 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:08,644 basehttp 2565 123641654150912 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-01 03:57:10,913 basehttp 2565 123641664636672 "GET /users/register/ HTTP/1.1" 200 18426
+WARNING 2025-05-01 03:57:11,293 log 2565 123641696093952 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:57:11,294 basehttp 2565 123641696093952 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:11,391 log 2565 123641570264832 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:11,392 basehttp 2565 123641570264832 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:18,850 log 2565 123641685608192 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:18,851 basehttp 2565 123641685608192 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-01 03:57:23,731 basehttp 2565 123641696093952 "GET /users/register/ HTTP/1.1" 200 18426
+WARNING 2025-05-01 03:57:23,857 log 2565 123641675122432 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:23,858 basehttp 2565 123641675122432 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:23,907 log 2565 123641570264832 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:57:23,908 basehttp 2565 123641570264832 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:28,714 log 2565 123641570264832 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:28,715 basehttp 2565 123641570264832 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-01 03:57:34,283 basehttp 2565 123641654150912 "GET /users/login/ HTTP/1.1" 200 13871
+WARNING 2025-05-01 03:57:34,972 log 2565 123641685608192 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:34,972 basehttp 2565 123641685608192 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:35,696 log 2565 123641696093952 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:57:35,696 basehttp 2565 123641696093952 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:39,853 log 2565 123641570264832 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:39,853 basehttp 2565 123641570264832 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-01 03:57:44,045 basehttp 2565 123641654150912 "POST /users/login/ HTTP/1.1" 302 0
+INFO 2025-05-01 03:57:44,416 basehttp 2565 123641696093952 "GET /dashboard/ HTTP/1.1" 200 27343
+WARNING 2025-05-01 03:57:44,772 log 2565 123641675122432 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:57:44,772 basehttp 2565 123641675122432 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:44,781 log 2565 123641570264832 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:44,782 basehttp 2565 123641570264832 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-01 03:57:45,595 log 2565 123641685608192 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:57:45,596 basehttp 2565 123641685608192 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-01 03:58:44,281 basehttp 2565 123641664636672 "GET /dashboard/ HTTP/1.1" 200 26774
+WARNING 2025-05-01 03:58:44,420 log 2565 123641685608192 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:58:44,421 basehttp 2565 123641685608192 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-01 03:58:44,502 log 2565 123641696093952 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:58:44,502 basehttp 2565 123641696093952 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-01 03:58:44,725 log 2565 123641654150912 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:58:44,725 basehttp 2565 123641654150912 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-01 03:58:47,330 basehttp 2565 123641685608192 "GET /accounts/detail/ HTTP/1.1" 200 21230
+WARNING 2025-05-01 03:58:47,525 log 2565 123641675122432 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:58:47,526 basehttp 2565 123641675122432 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-01 03:58:47,532 log 2565 123641664636672 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:58:47,533 basehttp 2565 123641664636672 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-01 03:58:49,281 basehttp 2565 123641570264832 "GET /transactions/transfer/ HTTP/1.1" 200 22715
+WARNING 2025-05-01 03:58:49,834 log 2565 123641696093952 Not Found: /static/css/style.css
+WARNING 2025-05-01 03:58:49,837 basehttp 2565 123641696093952 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-01 03:58:50,371 log 2565 123641675122432 Not Found: /static/js/script.js
+WARNING 2025-05-01 03:58:50,371 basehttp 2565 123641675122432 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:02:30,147 autoreload 2486 127642790896256 Watching for file changes with StatReloader
+INFO 2025-05-22 09:02:40,301 basehttp 2486 127642707683072 "GET / HTTP/1.1" 200 25388
+WARNING 2025-05-22 09:02:40,590 log 2486 127642699290368 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:02:40,591 basehttp 2486 127642699290368 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:02:40,601 log 2486 127642690897664 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:02:40,602 basehttp 2486 127642690897664 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:02:40,923 log 2486 127642682504960 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:02:40,923 basehttp 2486 127642682504960 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:02:42,532 log 2486 127642334394112 Not Found: /favicon.ico
+WARNING 2025-05-22 09:02:42,532 basehttp 2486 127642334394112 "GET /favicon.ico HTTP/1.1" 404 179
+WARNING 2025-05-22 09:02:52,450 log 2486 127642334394112 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:02:52,451 basehttp 2486 127642334394112 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:03:33,818 basehttp 2486 127642326001408 "GET / HTTP/1.1" 200 25396
+WARNING 2025-05-22 09:03:34,165 log 2486 127642317608704 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:03:34,168 basehttp 2486 127642317608704 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:03:34,255 log 2486 127642309216000 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:03:34,256 basehttp 2486 127642309216000 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:03:39,375 log 2486 127642707683072 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:03:39,376 basehttp 2486 127642707683072 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:40:04,317 autoreload 2450 131410111746688 Watching for file changes with StatReloader
+INFO 2025-05-22 09:40:13,272 basehttp 2450 131410027341568 "GET / HTTP/1.1" 200 25396
+WARNING 2025-05-22 09:40:13,699 log 2450 131410018948864 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:40:13,700 basehttp 2450 131410018948864 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:40:13,723 log 2450 131410010556160 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:40:13,725 basehttp 2450 131410010556160 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:40:27,831 basehttp 2450 131410002163456 "GET /users/login/ HTTP/1.1" 200 13871
+WARNING 2025-05-22 09:40:28,004 log 2450 131410027341568 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:40:28,005 basehttp 2450 131410027341568 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:40:28,074 log 2450 131409993770752 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:40:28,074 basehttp 2450 131409993770752 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:40:32,090 basehttp 2450 131409976985344 "POST /users/login/ HTTP/1.1" 302 0
+INFO 2025-05-22 09:40:32,197 basehttp 2450 131410027341568 "GET /dashboard/ HTTP/1.1" 200 27343
+WARNING 2025-05-22 09:40:33,421 log 2450 131410018948864 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:40:33,422 basehttp 2450 131410018948864 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:40:33,428 log 2450 131410010556160 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:40:33,432 basehttp 2450 131410010556160 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:41:08,510 basehttp 2450 131410027341568 "GET /transactions/transfer/ HTTP/1.1" 200 22715
+WARNING 2025-05-22 09:41:08,944 log 2450 131410010556160 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:41:08,947 basehttp 2450 131410010556160 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:41:09,086 log 2450 131409985378048 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:41:09,086 basehttp 2450 131409985378048 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:42:14,077 basehttp 2450 131410010556160 "GET /transactions/transfer/ HTTP/1.1" 200 22715
+WARNING 2025-05-22 09:42:14,209 log 2450 131410027341568 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:42:14,210 basehttp 2450 131410027341568 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:42:14,270 log 2450 131409976985344 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:42:14,271 basehttp 2450 131409976985344 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:42:16,660 basehttp 2450 131409985378048 "GET /cards/ HTTP/1.1" 200 24034
+WARNING 2025-05-22 09:42:17,101 log 2450 131410018948864 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:42:17,103 basehttp 2450 131410018948864 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:42:17,176 log 2450 131410002163456 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:42:17,177 basehttp 2450 131410002163456 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:42:22,619 basehttp 2450 131410010556160 "GET /cards/3/deactivate/ HTTP/1.1" 200 18643
+WARNING 2025-05-22 09:42:23,074 log 2450 131409976985344 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:42:23,075 basehttp 2450 131409976985344 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:42:23,084 log 2450 131410027341568 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:42:23,084 basehttp 2450 131410027341568 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:42:37,621 basehttp 2450 131410018948864 "POST /cards/3/deactivate/ HTTP/1.1" 302 0
+INFO 2025-05-22 09:42:37,945 basehttp 2450 131409993770752 "GET /cards/ HTTP/1.1" 200 24001
+WARNING 2025-05-22 09:42:38,052 log 2450 131410010556160 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:42:38,053 basehttp 2450 131410010556160 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:42:38,082 log 2450 131410027341568 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:42:38,082 basehttp 2450 131410027341568 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:42:41,127 basehttp 2450 131409976985344 "GET /cards/3/ HTTP/1.1" 200 25555
+WARNING 2025-05-22 09:42:41,596 log 2450 131409985378048 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:42:41,604 basehttp 2450 131409985378048 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:42:41,620 log 2450 131409490474752 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:42:41,623 basehttp 2450 131409490474752 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:42:51,589 basehttp 2450 131410002163456 "GET /cards/ HTTP/1.1" 200 23431
+WARNING 2025-05-22 09:42:51,693 log 2450 131410018948864 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:42:51,693 basehttp 2450 131410018948864 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:42:51,724 log 2450 131409993770752 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:42:51,725 basehttp 2450 131409993770752 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:42:53,470 basehttp 2450 131410010556160 "GET /cards/3/ HTTP/1.1" 200 25555
+WARNING 2025-05-22 09:42:53,581 log 2450 131410027341568 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:42:53,582 basehttp 2450 131410027341568 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:42:53,615 log 2450 131409976985344 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:42:53,616 basehttp 2450 131409976985344 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:43:03,985 basehttp 2450 131409993770752 "GET /cards/ HTTP/1.1" 200 23431
+WARNING 2025-05-22 09:43:04,114 log 2450 131410010556160 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:43:04,115 basehttp 2450 131410010556160 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:43:04,199 log 2450 131409482082048 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:43:04,200 basehttp 2450 131409482082048 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:43:07,555 basehttp 2450 131410002163456 "GET /cards/ HTTP/1.1" 200 23431
+WARNING 2025-05-22 09:43:07,710 log 2450 131410018948864 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:43:07,714 basehttp 2450 131410018948864 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:43:07,734 log 2450 131409993770752 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:43:07,735 basehttp 2450 131409993770752 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:43:11,158 basehttp 2450 131409993770752 "GET /cards/ HTTP/1.1" 200 23431
+WARNING 2025-05-22 09:43:11,274 log 2450 131409482082048 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:43:11,277 basehttp 2450 131409482082048 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:43:11,300 log 2450 131410010556160 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:43:11,304 basehttp 2450 131410010556160 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:43:38,928 basehttp 2450 131410018948864 "GET /dashboard/ HTTP/1.1" 200 26773
+WARNING 2025-05-22 09:43:39,060 log 2450 131409993770752 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:43:39,060 basehttp 2450 131409993770752 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:43:39,072 log 2450 131409482082048 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:43:39,072 basehttp 2450 131409482082048 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-22 09:55:49,364 basehttp 2450 131409993770752 "GET /cards/ HTTP/1.1" 200 23431
+WARNING 2025-05-22 09:55:49,638 log 2450 131409482082048 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:55:49,639 basehttp 2450 131409482082048 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:55:49,861 log 2450 131410018948864 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:55:49,862 basehttp 2450 131410018948864 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:55:54,783 log 2450 131409993770752 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:55:54,784 basehttp 2450 131409993770752 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:58:54,299 basehttp 2450 131410018948864 "GET /accounts/detail/ HTTP/1.1" 200 21230
+WARNING 2025-05-22 09:58:54,712 log 2450 131409482082048 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:58:54,713 basehttp 2450 131409482082048 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:58:54,733 log 2450 131409993770752 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:58:54,734 basehttp 2450 131409993770752 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-22 09:58:58,967 basehttp 2450 131410002163456 "GET /transactions/history/ HTTP/1.1" 200 22609
+WARNING 2025-05-22 09:58:59,573 log 2450 131410027341568 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:58:59,575 basehttp 2450 131410027341568 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-22 09:58:59,598 log 2450 131410010556160 Not Found: /static/js/script.js
+WARNING 2025-05-22 09:58:59,599 basehttp 2450 131410010556160 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-22 09:59:35,400 log 2450 131410018948864 Not Found: /static/css/style.css
+WARNING 2025-05-22 09:59:35,401 basehttp 2450 131410018948864 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:01:33,658 autoreload 2381 129093835580032 Watching for file changes with StatReloader
+INFO 2025-05-23 04:02:14,871 basehttp 2381 129093752317696 "GET /transactions/history/ HTTP/1.1" 302 0
+INFO 2025-05-23 04:02:15,107 basehttp 2381 129093743924992 "GET /users/login/?next=/transactions/history/ HTTP/1.1" 200 13871
+WARNING 2025-05-23 04:02:15,346 log 2381 129093735532288 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:02:15,347 basehttp 2381 129093735532288 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:02:15,574 log 2381 129093727139584 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:02:15,574 basehttp 2381 129093727139584 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:02:16,021 log 2381 129093718746880 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:02:16,022 basehttp 2381 129093718746880 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:02:49,185 basehttp 2381 129093727139584 "GET /users/register/ HTTP/1.1" 200 18426
+WARNING 2025-05-23 04:02:49,315 log 2381 129093718746880 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:02:49,315 basehttp 2381 129093718746880 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:02:49,516 log 2381 129093710354176 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:02:49,517 basehttp 2381 129093710354176 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:03:32,226 basehttp 2381 129093727139584 "POST /users/register/ HTTP/1.1" 302 0
+INFO 2025-05-23 04:03:32,335 basehttp 2381 129093710354176 "GET /users/verify-email/ HTTP/1.1" 200 17778
+WARNING 2025-05-23 04:03:32,790 log 2381 129093735532288 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:03:32,790 basehttp 2381 129093735532288 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:03:32,812 log 2381 129093743924992 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:03:32,812 basehttp 2381 129093743924992 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:04:08,695 basehttp 2381 129093718746880 "POST /users/verify-email/ HTTP/1.1" 200 17318
+WARNING 2025-05-23 04:04:08,817 log 2381 129093743924992 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:04:08,817 basehttp 2381 129093743924992 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:04:08,872 log 2381 129093735532288 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:04:08,873 basehttp 2381 129093735532288 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:04:12,372 basehttp 2381 129093752317696 "POST /users/verify-email/ HTTP/1.1" 302 0
+INFO 2025-05-23 04:04:12,497 basehttp 2381 129093743924992 "GET /dashboard/ HTTP/1.1" 200 21495
+WARNING 2025-05-23 04:04:12,814 log 2381 129093710354176 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:04:12,814 basehttp 2381 129093710354176 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:04:12,819 log 2381 129093228033792 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:04:12,819 basehttp 2381 129093228033792 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:06:18,111 basehttp 2381 129093228033792 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-05-23 04:06:18,310 basehttp 2381 129093752317696 "GET /users/login/?next=/dashboard/ HTTP/1.1" 200 13871
+WARNING 2025-05-23 04:06:18,605 log 2381 129093710354176 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:06:18,606 basehttp 2381 129093710354176 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:06:18,612 log 2381 129093743924992 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:06:18,613 basehttp 2381 129093743924992 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:06:19,163 log 2381 129093735532288 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:06:19,164 basehttp 2381 129093735532288 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:06:22,665 basehttp 2381 129093735532288 "GET /users/register/ HTTP/1.1" 200 18426
+WARNING 2025-05-23 04:06:22,781 log 2381 129093228033792 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:06:22,781 basehttp 2381 129093228033792 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:06:22,831 log 2381 129093743924992 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:06:22,831 basehttp 2381 129093743924992 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:07:01,305 basehttp 2381 129093727139584 "POST /users/register/ HTTP/1.1" 200 18658
+WARNING 2025-05-23 04:07:01,687 log 2381 129093718746880 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:07:01,688 basehttp 2381 129093718746880 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:07:01,699 log 2381 129093219641088 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:07:01,699 basehttp 2381 129093219641088 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:07:28,952 basehttp 2381 129093219641088 "POST /users/register/ HTTP/1.1" 302 0
+INFO 2025-05-23 04:07:29,134 basehttp 2381 129093211248384 "GET /users/verify-email/ HTTP/1.1" 200 17778
+WARNING 2025-05-23 04:07:29,244 log 2381 129093228033792 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:07:29,245 basehttp 2381 129093228033792 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:07:29,277 log 2381 129093752317696 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:07:29,277 basehttp 2381 129093752317696 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:07:52,355 basehttp 2381 129093219641088 "POST /users/verify-email/ HTTP/1.1" 302 0
+INFO 2025-05-23 04:07:52,444 basehttp 2381 129093228033792 "GET /dashboard/ HTTP/1.1" 200 21495
+WARNING 2025-05-23 04:07:52,577 log 2381 129093718746880 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:07:52,578 basehttp 2381 129093718746880 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:07:52,609 log 2381 129093735532288 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:07:52,610 basehttp 2381 129093735532288 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:07:59,948 basehttp 2381 129093228033792 "GET /transactions/transfer/ HTTP/1.1" 200 22709
+WARNING 2025-05-23 04:08:00,077 log 2381 129093752317696 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:08:00,077 basehttp 2381 129093752317696 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:08:00,098 log 2381 129093211248384 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:08:00,099 basehttp 2381 129093211248384 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:08:31,669 basehttp 2381 129093219641088 "POST /transactions/transfer/ HTTP/1.1" 302 0
+INFO 2025-05-23 04:08:31,759 basehttp 2381 129093735532288 "GET /transactions/history/ HTTP/1.1" 200 20817
+WARNING 2025-05-23 04:08:31,896 log 2381 129093727139584 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:08:31,897 basehttp 2381 129093727139584 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:08:31,905 log 2381 129093718746880 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:08:31,905 basehttp 2381 129093718746880 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:09:00,046 basehttp 2381 129093710354176 "GET /dashboard/ HTTP/1.1" 200 22121
+WARNING 2025-05-23 04:09:00,303 log 2381 129093743924992 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:09:00,304 basehttp 2381 129093743924992 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:09:00,343 log 2381 129093202855680 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:09:00,343 basehttp 2381 129093202855680 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:09:21,314 basehttp 2381 129093718746880 "GET /dashboard/ HTTP/1.1" 200 22109
+WARNING 2025-05-23 04:09:21,547 log 2381 129093211248384 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:09:21,547 basehttp 2381 129093211248384 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:09:21,593 log 2381 129093752317696 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:09:21,593 basehttp 2381 129093752317696 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:09:28,357 basehttp 2381 129093228033792 "GET /transactions/transfer/ HTTP/1.1" 200 22709
+WARNING 2025-05-23 04:09:28,486 log 2381 129093743924992 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:09:28,486 basehttp 2381 129093743924992 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:09:28,631 log 2381 129093194462976 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:09:28,632 basehttp 2381 129093194462976 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:09:44,646 basehttp 2381 129093735532288 "POST /transactions/transfer/ HTTP/1.1" 200 22922
+WARNING 2025-05-23 04:09:44,761 log 2381 129093710354176 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:09:44,762 basehttp 2381 129093710354176 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:09:44,920 log 2381 129093186070272 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:09:44,921 basehttp 2381 129093186070272 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:10:02,120 basehttp 2381 129093743924992 "POST /transactions/transfer/ HTTP/1.1" 302 0
+INFO 2025-05-23 04:10:02,310 basehttp 2381 129093202855680 "GET /transactions/history/ HTTP/1.1" 200 23463
+WARNING 2025-05-23 04:10:02,718 log 2381 129093228033792 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:10:02,719 basehttp 2381 129093228033792 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:10:02,815 log 2381 129093727139584 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:10:02,816 basehttp 2381 129093727139584 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:10:14,547 basehttp 2381 129093219641088 "GET /dashboard/ HTTP/1.1" 200 23744
+WARNING 2025-05-23 04:10:14,658 log 2381 129093177677568 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:10:14,658 basehttp 2381 129093177677568 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:10:14,698 log 2381 129092691162880 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:10:14,699 basehttp 2381 129092691162880 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:10:29,250 basehttp 2381 129093211248384 "GET /kyc/status/ HTTP/1.1" 200 15025
+WARNING 2025-05-23 04:10:29,350 log 2381 129093752317696 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:10:29,351 basehttp 2381 129093752317696 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:10:29,391 log 2381 129092682770176 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:10:29,391 basehttp 2381 129092682770176 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:10:36,237 basehttp 2381 129093219641088 "GET /kyc/upload/ HTTP/1.1" 200 22829
+WARNING 2025-05-23 04:10:36,344 log 2381 129093177677568 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:10:36,345 basehttp 2381 129093177677568 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:10:36,385 log 2381 129092691162880 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:10:36,386 basehttp 2381 129092691162880 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:21:54,114 basehttp 2381 129092691162880 "GET /transactions/transfer/ HTTP/1.1" 200 22708
+WARNING 2025-05-23 04:21:54,418 log 2381 129093177677568 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:21:54,418 basehttp 2381 129093177677568 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:21:54,647 log 2381 129093219641088 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:21:54,648 basehttp 2381 129093219641088 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:21:57,967 basehttp 2381 129092682770176 "GET /dashboard/ HTTP/1.1" 200 23743
+WARNING 2025-05-23 04:21:58,240 log 2381 129093752317696 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:21:58,240 basehttp 2381 129093752317696 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:21:58,275 log 2381 129093743924992 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:21:58,275 basehttp 2381 129093743924992 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:22:01,101 basehttp 2381 129093219641088 "GET /accounts/detail/ HTTP/1.1" 200 19657
+WARNING 2025-05-23 04:22:01,252 log 2381 129092682770176 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:22:01,253 basehttp 2381 129092682770176 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:22:01,338 log 2381 129093735532288 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:22:01,338 basehttp 2381 129093735532288 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:22:04,528 basehttp 2381 129093752317696 "GET /transactions/history/ HTTP/1.1" 200 22881
+WARNING 2025-05-23 04:22:04,711 log 2381 129093743924992 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:22:04,711 basehttp 2381 129093743924992 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:22:04,797 log 2381 129093727139584 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:22:04,797 basehttp 2381 129093727139584 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:22:14,610 basehttp 2381 129093735532288 "GET /transactions/transfer/ HTTP/1.1" 200 22708
+WARNING 2025-05-23 04:22:14,723 log 2381 129092682770176 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:22:14,723 basehttp 2381 129092682770176 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:22:14,873 log 2381 129093752317696 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:22:14,873 basehttp 2381 129093752317696 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:22:37,579 basehttp 2381 129093743924992 "GET /transactions/transfer/ HTTP/1.1" 200 22708
+WARNING 2025-05-23 04:22:37,927 log 2381 129092691162880 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:22:37,927 basehttp 2381 129092691162880 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:22:37,930 log 2381 129093727139584 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:22:37,931 basehttp 2381 129093727139584 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:22:40,209 basehttp 2381 129093718746880 "GET /cards/ HTTP/1.1" 200 12078
+WARNING 2025-05-23 04:22:40,372 log 2381 129093219641088 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:22:40,372 basehttp 2381 129093219641088 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:22:40,380 log 2381 129093177677568 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:22:40,380 basehttp 2381 129093177677568 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:22:44,124 basehttp 2381 129093718746880 "GET /kyc/status/ HTTP/1.1" 200 15025
+WARNING 2025-05-23 04:22:44,406 log 2381 129093177677568 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:22:44,406 basehttp 2381 129093177677568 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:22:44,415 log 2381 129093219641088 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:22:44,415 basehttp 2381 129093219641088 "GET /static/js/script.js HTTP/1.1" 404 179
+INFO 2025-05-23 04:25:05,859 basehttp 2381 129093718746880 "GET /kyc/status/ HTTP/1.1" 200 15025
+WARNING 2025-05-23 04:25:06,015 log 2381 129093219641088 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:25:06,016 basehttp 2381 129093219641088 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:25:06,072 log 2381 129093177677568 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:25:06,074 basehttp 2381 129093177677568 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:25:08,200 basehttp 2381 129093727139584 "GET /kyc/upload/ HTTP/1.1" 200 22829
+WARNING 2025-05-23 04:25:08,431 log 2381 129093752317696 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:25:08,432 basehttp 2381 129093752317696 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:25:08,469 log 2381 129093743924992 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:25:08,469 basehttp 2381 129093743924992 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:25:14,389 basehttp 2381 129093735532288 "GET /transactions/transfer/ HTTP/1.1" 200 22708
+WARNING 2025-05-23 04:25:14,581 log 2381 129093727139584 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:25:14,581 basehttp 2381 129093727139584 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:25:14,592 log 2381 129093710354176 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:25:14,592 basehttp 2381 129093710354176 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:25:34,747 log 2381 129093735532288 Not Found: /transactions/logout
+WARNING 2025-05-23 04:25:34,747 basehttp 2381 129093735532288 "GET /transactions/logout HTTP/1.1" 404 179
+WARNING 2025-05-23 04:25:37,298 log 2381 129093727139584 Not Found: /transactions/logout
+WARNING 2025-05-23 04:25:37,298 basehttp 2381 129093727139584 "GET /transactions/logout HTTP/1.1" 404 179
+INFO 2025-05-23 04:25:39,081 basehttp 2381 129093752317696 "GET /transactions/transfer/ HTTP/1.1" 200 22708
+WARNING 2025-05-23 04:25:39,343 log 2381 129093718746880 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:25:39,344 basehttp 2381 129093718746880 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:25:39,456 log 2381 129093228033792 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:25:39,457 basehttp 2381 129093228033792 "GET /static/css/style.css HTTP/1.1" 404 179
+INFO 2025-05-23 04:28:32,813 autoreload 15464 138756535415424 Watching for file changes with StatReloader
+INFO 2025-05-23 04:29:08,134 basehttp 2381 129093228033792 "GET /transactions/transfer/ HTTP/1.1" 200 22708
+WARNING 2025-05-23 04:29:08,356 log 2381 129093752317696 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:29:08,356 basehttp 2381 129093752317696 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:29:08,383 log 2381 129093718746880 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:29:08,384 basehttp 2381 129093718746880 "GET /static/js/script.js HTTP/1.1" 404 179
+WARNING 2025-05-23 04:29:18,911 log 2381 129093735532288 Not Found: /favicon.ico
+WARNING 2025-05-23 04:29:18,911 basehttp 2381 129093735532288 "GET /favicon.ico HTTP/1.1" 404 179
+INFO 2025-05-23 04:29:30,987 basehttp 2381 129093743924992 "GET /transactions/transfer/ HTTP/1.1" 200 22708
+WARNING 2025-05-23 04:29:31,194 log 2381 129093727139584 Not Found: /static/css/style.css
+WARNING 2025-05-23 04:29:31,194 basehttp 2381 129093727139584 "GET /static/css/style.css HTTP/1.1" 404 179
+WARNING 2025-05-23 04:29:31,454 log 2381 129093735532288 Not Found: /static/js/script.js
+WARNING 2025-05-23 04:29:31,454 basehttp 2381 129093735532288 "GET /static/js/script.js HTTP/1.1" 404 179
